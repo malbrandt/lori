@@ -1,12 +1,12 @@
 {
     "name": "malbrandt/lori",
-    "description": ":description",
+    "description": "Laravel steroids intended to help developers. Can speed up developers with helper functions, utility classes, application's performance with its awesome features and many more.",
     "license": "MIT",
     "authors": [
         {
             "name": "Marek Malbrandt",
-            "email": "marek@malbrandt.pl",
-            "homepage": "https://malbrandt.pl"
+            "email": "marek.malbrandt@gmail.com",
+            "homepage": "https://malbrandt.dev"
         }
     ],
     "homepage": "https://github.com/malbrandt/lori",
@@ -23,7 +23,10 @@
     "autoload": {
         "psr-4": {
             "Malbrandt\\Lori\\": "src/"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

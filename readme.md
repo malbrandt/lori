@@ -42,7 +42,7 @@ Bigger conceptions that require separate class to be implemented also have got t
 In example `Malbrandt/Lori/Database/Autofactory` class will have its tests in class `AutofactoryTest` in file `src/Database/AutofactoryTest.php`.
 
 ### Writing tests
-For unit tests we are using PHPUnit library (@TODO provide url).
+For unit tests we are using PHPUnit library and Orchestra framework (@TODO provide urls).
 All methods has `@test` directive in theirs PHPDocBlock.
 Test method names are formuled in behavioral form, it means that they describes some feature or capabilities of some object, class or function.
 Examples:
@@ -71,7 +71,8 @@ Here are few of them:
 * add some unusual test or test scenario,
 * add code example with some function usage,
 * make code review of someone changes (Pull Requests),
-* do the things TODO :) 
+* write an article about some feature from this library with some great explanation of concepts and code examples (once written, link it in readme file in section `Further reading`),
+* do the things TODO :)
 
 ## Versioning
 This library uses [Semantic Versioning 2.0.0](https://semver.org/). We can assume that each subsequent minor version must consist of at least one new function. Any corrections (obviously compatible backwards) in the code or documentation will be included in the "patch" part of the version.
