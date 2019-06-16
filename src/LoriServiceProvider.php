@@ -16,7 +16,7 @@ class LoriServiceProvider extends ServiceProvider
         // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'malbrandt');
         // $this->loadViewsFrom(__DIR__.'/../resources/views', 'malbrandt');
         // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        $this->loadRoutesFrom(__DIR__ . '/routes.php');
+        // $this->loadRoutesFrom(__DIR__ . '/routes.php');
 
         // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole())
@@ -34,9 +34,9 @@ class LoriServiceProvider extends ServiceProvider
     protected function bootForConsole()
     {
         // Publishing the configuration file.
-        $this->publishes([
+        /*$this->publishes([
             __DIR__ . '/../config/lori.php' => config_path('lori.php'),
-        ], 'lori.config');
+        ], 'lori.config');*/
 
         // Publishing the views.
         /*$this->publishes([
@@ -65,7 +65,7 @@ class LoriServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/lori.php', 'lori');
+        //$this->mergeConfigFrom(__DIR__ . '/../config/lori.php', 'lori');
     }
 
 

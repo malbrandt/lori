@@ -8,6 +8,17 @@
 Library that was created in order to help Laravel's developers in their work. It's consist of a suite of usefull functions and conceptions, that can help you speed up prototyping process, optimize application performance, add more readability to your codebase etc. It supplements Laravel with missing functions, that make it an even better and convenient framework.
 
 ## Code examples
+```php
+// Read value of the non accessible property (private or protected).
+$object = new class { private $foo = 'bar'; };
+$value = access_prop($object, 'foo'); // $value = 'bar'
+
+// Set value to the non accessible property.
+$object = new class { protected $foo = 'bar'; };
+access_prop($object, 'foo', 'biz'); // $object->foo = 'biz'
+access_prop($object, 'foo', null, true); // $object->foo = null
+```
+
 @TODO - place some examples here.
 
 ## Documentation
