@@ -8,7 +8,19 @@
 Library that was created in order to help Laravel's developers in their work. It's consist of a suite of usefull functions and conceptions, that can help you speed up prototyping process, optimize application performance, add more readability to your codebase etc. It supplements Laravel with missing functions, that make it an even better and convenient framework.
 
 ## Code examples
-```php
+Below you can find global helper functions reference with short description and usage examples.
+<table>
+<thead>
+    <tr>
+        <td>Function</td>
+        <td>Description</td>
+        <td>Examples</td>
+    </tr>
+    <tr>
+        <td>access_prop</td>
+        <td>Reads or assign value for non accessible class property (private/protected).</td>
+        <td>
+        <pre lang="php">
 // Read value of the non accessible property (private or protected).
 $object = new class { private $foo = 'bar'; };
 $value = access_prop($object, 'foo'); // $value = 'bar'
@@ -17,7 +29,33 @@ $value = access_prop($object, 'foo'); // $value = 'bar'
 $object = new class { protected $foo = 'bar'; };
 access_prop($object, 'foo', 'biz'); // $object->foo = 'biz'
 access_prop($object, 'foo', null, true); // $object->foo = null
-```
+        </pre>
+        </td>
+    </tr>
+    <tr>
+        <td>classify</td>
+        <td>Returns type of the variable (value types) or a class name (reference types).</td>
+        <td>
+        <pre lang="php">
+        classify('1'); // 'integer'
+        classify('1.23'); // 'double' (or 'float', or 'real' - depends on platform)
+        classify([]); // 'array'
+        classify(new \App\User); // 'App/User' (instance passed)
+        classify(\App\User::class); // 'App/User' (string with FQCN passed)
+        classify('test'); // 'string'
+        </pre>
+        </td>
+    </tr>
+    <!--<tr>
+        <td></td>
+        <td></td>
+        <td>
+        <pre lang="php">
+        </pre>
+        </td>
+    </tr>-->
+</thead>
+</table>
 
 @TODO - place some examples here.
 
