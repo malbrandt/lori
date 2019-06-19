@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Carbon;
+
 if (! function_exists('access_prop')) {
     /**
      * Force get/set the object's property value - even if it's not public (access modifier).
@@ -43,87 +45,6 @@ if (! function_exists('access_prop')) {
         }
 
         return $value;
-    }
-}
-if (! function_exists('classify')) {
-    /**
-     * Returns class name of given object, if object was passed or variable type, if passed value-type
-     * variable.
-     *
-     * @param mixed $thing Value to be classified.
-     *
-     * @return string The class or type of given value.
-     * @since   0.3.2
-     */
-    function classify($thing): string
-    {
-        $type = gettype($thing);
-        switch (true) {
-            case $type === 'object':
-                // If some object instance was given, return its class name.
-                return get_class($thing);
-
-            case $type === 'string' && (class_exists($thing) || trait_exists($thing) || interface_exists($thing)):
-                // When class/trait/interface name was provided, return it back, because it's already a class name.
-                return $thing;
-
-            default:
-                return $type;
-        }
-    }
-}
-if (! function_exists('method')) {
-    /**
-     * Returns the caller name in Laravel's action format ("Class@method").
-     *
-     * @param int $backwards How many steps in call stack we should go backwards? Must be greater then 0.
-     * @param int $format    Format to use
-     *
-     * @return array|string|null Caller class and method name in Laravel's action format.
-     * @see     \caller() Returns caller part or more details.
-     * @see     \fileline() Returns file and line from which call was invoked.
-     * @since   0.5.3
-     */
-    function method(
-        int $backwards = 2,
-        int $format = METHOD_FORMAT_CALLABLE
-    ) {
-        $result = null;
-
-        if (($caller = caller($backwards, null)) === null) {
-            return null;
-        }
-        $isClosure = strpos($caller['function'], '{closure}') > -1;
-        if ($isClosure) {
-            // TODO: is it possible to return callable Closure (caller) using some reflection/debug backtrace techniques?
-            return null;
-        }
-
-        switch ($format) {
-            case METHOD_FORMAT_ACTION:
-                $result = class_basename($caller['class']) . '@' . $caller['function'];
-                break;
-
-            case METHOD_FORMAT_ACTION_FQCN:
-                $result = $caller['class'] . '@' . $caller['function'];
-                break;
-
-            case METHOD_FORMAT_CALLABLE:
-                if (! isset($caller['class'])) {
-                    $result = $caller['function'];
-                } elseif (isset($caller['object'])) {
-                    $result = [$caller['object'], $caller['function']];
-                } else {
-                    $result = $caller['class'] . '::' . $caller['function'];
-                }
-
-                break;
-
-            default:
-                throw new InvalidArgumentException('Invalid result format. Tip: use one of the constants prefixed "METHOD_FORMAT_*".');
-        }
-
-        return $result;
     }
 }
 if (! function_exists('caller')) {
@@ -171,5 +92,132 @@ if (! function_exists('caller')) {
                 ' object, string if you need only one part or an array, if you need more.'
             );
         }
+    }
+}
+if (! function_exists('carbonize')) {
+    /**
+     * Unifies various date/datetime types into \Illuminate\Support\Carbon object.
+     * Supports:
+     * - date-, time- or datetime strings; everything that could be parsed be Carbon::parse method,
+     * - \Carbon\Carbon and \Illuminate\Support\Carbon objects (it clones them),
+     * - DateTime, DateTimeImmutable objects.
+     *
+     * Returns null if conversion fails.
+     *
+     * @param string|\DateTime|\DateTimeImmutable|\Illuminate\Support\Carbon|\Carbon\Carbon $date The value to be unified
+     *
+     * @return \Illuminate\Support\Carbon|null If successfully unified, returns an instance of \Illuminate\Support\Carbon; null otherwise.
+     * @throws InvalidArgumentException When cannot carbonize given value
+     * @since   0.6.3
+     * @todo    Carbonizer class - manager that could be extended (i.e. with macros) to support user specified converters
+     */
+    function carbonize($date)
+    {
+        switch (true) {
+            case is_string($date):
+                return Illuminate\Support\Carbon::parse($date);
+
+            case $date instanceof \Carbon\Carbon:
+                return Illuminate\Support\Carbon::create(
+                    $date->year,
+                    $date->month,
+                    $date->day,
+                    $date->hour,
+                    $date->minute,
+                    $date->second,
+                    $date->tz
+                );
+
+            case $date instanceof Carbon:
+                return $date->copy();
+
+            case $date instanceof DateTime:
+            case $date instanceof DateTimeImmutable:
+                return Illuminate\Support\Carbon::instance($date);
+
+            default:
+                return null;
+        }
+    }
+}
+if (! function_exists('classify')) {
+    /**
+     * Returns class name of given object, if object was passed or variable type, if passed value-type
+     * variable.
+     *
+     * @param mixed $thing Value to be classified.
+     *
+     * @return string The class or type of given value.
+     * @since   0.3.2
+     */
+    function classify($thing): string
+    {
+        $type = gettype($thing);
+        switch (true) {
+            case $type === 'object':
+                // If some object instance was given, return its class name.
+                return get_class($thing);
+
+            case $type === 'string' && (class_exists($thing) || trait_exists($thing) || interface_exists($thing)):
+                // When class/trait/interface name was provided, return it back, because it's already a class name.
+                return $thing;
+
+            default:
+                return $type;
+        }
+    }
+}
+if (! function_exists('method')) {
+    /**
+     * Returns the caller name in Laravel's action format ("Class@method").
+     *
+     * @param int $backwards How many steps in call stack we should go backwards? Must be greater then 0.
+     * @param int $format    Format to use
+     *
+     * @return array|string|null Caller class and method name in Laravel's action format.
+     * @see     \caller() Returns caller part or more details.
+     * @see     \fileline() Returns file and line from which call was invoked.
+     * @since   0.5.3
+     */
+    function method(
+        int $backwards = 2,
+        int $format = METHOD_FORMAT_CALLABLE
+    ) {
+        $result = null;
+
+        if (($caller = caller($backwards)) === null) {
+            return null;
+        }
+        $isClosure = strpos($caller['function'], '{closure}') > -1;
+        if ($isClosure) {
+            // TODO: is it possible to return callable Closure (caller) using some reflection/debug backtrace techniques?
+            return null;
+        }
+
+        switch ($format) {
+            case METHOD_FORMAT_ACTION:
+                $result = class_basename($caller['class']) . '@' . $caller['function'];
+                break;
+
+            case METHOD_FORMAT_ACTION_FQCN:
+                $result = $caller['class'] . '@' . $caller['function'];
+                break;
+
+            case METHOD_FORMAT_CALLABLE:
+                if (! isset($caller['class'])) {
+                    $result = $caller['function'];
+                } elseif (isset($caller['object'])) {
+                    $result = [$caller['object'], $caller['function']];
+                } else {
+                    $result = $caller['class'] . '::' . $caller['function'];
+                }
+
+                break;
+
+            default:
+                throw new InvalidArgumentException('Invalid result format. Tip: use one of the constants prefixed "METHOD_FORMAT_*".');
+        }
+
+        return $result;
     }
 }

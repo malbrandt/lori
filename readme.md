@@ -9,6 +9,7 @@ Library that was created in order to help Laravel's developers in their work. It
 
 ## Code examples
 Below you can find global helper functions reference with short description and usage examples.
+
 <table>
 <thead>
     <tr>
@@ -33,16 +34,56 @@ access_prop($object, 'foo', null, true); // $object->foo = null
         </td>
     </tr>
     <tr>
+        <td>caller</td>
+        <td>Returns info (array) with caller info from debug_stacktrace method. Can be useful for tracing.</td>
+        <td>
+        <pre lang="php">
+$caller = caller(); // ['file' => ..., 'line' => ..., 'class' => ..., ...] (full info from debug_stacktrace)
+$caller = caller(1, 'function') // i.e. 'eval', name of function, where caller() function was called
+$caller = caller(2, 'class') // specified part of caller (class), i.e. 'UserController'
+$caller = caller(1, ['function', 'class']); // specified parts of caller (array), i.e. ['function' => ..., 'class' => ...]
+        </pre>
+        </td>
+    </tr>
+    <tr>
+        <td>carbonize</td>
+        <td>Unifies various date formats into \Illuminate\Support\Carbon object instance.</td>
+        <td>
+        <pre lang="php">
+// Valid conversions:
+$carbon = carbonize('2015-02-05');
+$carbon = carbonize('2018-06-15 12:34:00');
+$carbon = carbonize('first day of May 2000');
+$carbon = carbonize(new \DateTime());
+$carbon = carbonize(new \DateTimeImmutable());
+// If conversion fails, null will be returned.
+$carbon = carbonize('foobar'); // null
+        </pre>
+        </td>
+    </tr>
+    <tr>
         <td>classify</td>
         <td>Returns type of the variable (value types) or a class name (reference types).</td>
         <td>
         <pre lang="php">
-        classify('1'); // 'integer'
-        classify('1.23'); // 'double' (or 'float', or 'real' - depends on platform)
-        classify([]); // 'array'
-        classify(new \App\User); // 'App/User' (instance passed)
-        classify(\App\User::class); // 'App/User' (string with FQCN passed)
-        classify('test'); // 'string'
+classify('1'); // 'integer'
+classify('1.23'); // 'double' (or 'float', or 'real' - depends on platform)
+classify([]); // 'array'
+classify(new \App\User); // 'App/User' (instance passed)
+classify(\App\User::class); // 'App/User' (string with FQCN passed)
+classify('test'); // 'string'
+        </pre>
+        </td>
+    </tr>
+    <tr>
+        <td>method</td>
+        <td>Returns caller in various useful formats.</td>
+        <td>
+        <pre lang="php">
+method(); // caller as valid PHP callable (does not support Closures)
+method(3); // caller of caller (as a callable)
+method(2, METHOD_FORMAT_ACTION); // returns caller in format: FooClass@barMethod
+method(2, METHOD_FORMAT_ACTION_FQCN); // returns caller in format: Class\Namespace\Foo@biz
         </pre>
         </td>
     </tr>
@@ -190,7 +231,7 @@ For the creators of the Laravel framework and all libraries that were used to cr
 - [ ] batch_insert
 - [ ] call_method
 - [x] caller
-- [ ] carbonize
+- [x] carbonize
 - [ ] clamp
 - [x] classify
 - [ ] cli
