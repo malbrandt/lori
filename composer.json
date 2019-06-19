@@ -25,6 +25,7 @@
             "Malbrandt\\Lori\\": "src/"
         },
         "files": [
+            "src/constants.php",
             "src/helpers.php"
         ]
     },

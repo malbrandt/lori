@@ -149,3 +149,74 @@ For the creators of the Laravel framework and all libraries that were used to cr
 [link-travis]: https://travis-ci.org/malbrandt/lori
 [link-styleci]: https://styleci.io/repos/12345678
 [link-author]: https://github.com/malbrandt
+
+## ToDo's
+
+### Concepts
+
+- [ ] DTO
+- [ ] Automemoization
+- [ ] Memoizaiton
+- [ ] CreateOrIncrement
+- [ ] CreatesReferences
+- [ ] HasValidationRules
+- [ ] SelectOptions
+- [ ] Identifiable
+- [ ] Measure
+- [ ] RelativeDate
+- [ ] RequestFilters
+- [ ] SelectiveFind
+- [ ] Service
+- [ ] Url
+- [ ] Str
+- [ ] ValidationHelpers
+- [ ] Autofactory
+- [ ] Autoforms
+- [ ] ArrayToExcel
+- [ ] DynamicParameters
+- [ ] NotImplementedException
+- [ ] AutoValidation
+- [ ] DisplayProgress
+- [ ] BatchInsert
+- [ ] GatherQueries
+- [ ] MeasureResponseTimes
+- [ ] RouteLocks
+- [ ] RegisterRoutes
+- [ ] Deferred (execution)
+
+### Helper functions
+
+- [x] access_prop
+- [ ] batch_insert
+- [ ] call_method
+- [x] caller
+- [ ] carbonize
+- [ ] clamp
+- [x] classify
+- [ ] cli
+- [ ] cli_in
+- [ ] cli_out
+- [ ] create_fake
+- [ ] equals
+- [ ] was
+- [ ] fileline
+- [ ] flash_error
+- [ ] flash_info
+- [ ] flash_success
+- [ ] flash_warning
+- [ ] has_trait
+- [ ] make_fake
+- [x] method
+- [ ] on
+- [ ] random_float
+- [ ] register_singletons
+- [ ] sometimes
+- [ ] will
+- [ ] will
+- [ ] str_between
+- [ ] to_string
+- [ ] str_crop
+- [ ] str_remove
+- [ ] table
+- [ ] trace
+- [ ] testing
