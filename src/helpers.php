@@ -557,12 +557,47 @@ if (! function_exists('random_float')) {
      * @throws \Exception if it was not possible to gather sufficient entropy.
      * @see   \random_int()
      * @since 0.16.7
-     * @todo unit tests
+     * @todo  unit tests
      */
     function random_float($min = 0, $max = 1, $maxInclusive = true): float
     {
         return
             $min + random_int(0, mt_getrandmax() - ($maxInclusive ? 0 : 1))
             / mt_getrandmax() * ($max - $min);
+    }
+}
+if (! function_exists('register_singletons')) {
+    /**
+     * Register singletons to specified aliases.
+     *
+     * @param array $singletons Mapping: singleton's alias to name of the class
+     *
+     * @todo unit tests
+     * @since 0.17.7
+     */
+    function register_singletons(array $singletons): void
+    {
+        foreach ($singletons as $abstract => $concrete) {
+            if (is_string($concrete)) {
+                // We've received class name.
+                app()->singleton($abstract, function () use (&$concrete) {
+                    // We're omitting calling constructor directly with make.
+                    return app()->make($concrete);
+                });
+            } elseif ($concrete instanceof Closure) {
+                // Receive closure that resolves concrete.
+                app()->singleton($abstract, $concrete);
+            } elseif (is_object($concrete)) {
+                // Received instance that should be a singleton.
+                app()->singleton($abstract, function () use ($concrete) {
+                    return $concrete;
+                });
+            } else {
+                throw new InvalidArgumentException(
+                    'Invalid concrete specified. Tip: concrete must be class name (FQCN),' .
+                    ' object instance that would be a singleton or a Closure that resolves concrete impl.'
+                );
+            }
+        }
     }
 }

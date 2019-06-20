@@ -276,6 +276,22 @@ random_float(1, 10, false); // random float in range: 1 < x < 10 (max exclusive)
         </pre>
         </td>
     </tr>
+    <tr>
+        <td>register_singletons</td>
+        <td>Register singletons to specified aliases. Allows to pass concretes in various formats.</td>
+        <td>
+        <pre lang="php">
+// Pass class name (FQCN)
+register_singletons([UserService::class => UserService::class]);
+// Pass Closure that resolves singleton instance
+$resolver = function () { return new UserService; };
+register_singletons([UserService::class => $resolver]);
+// Pass object instance that should be a singleton:
+$manager = new class () { private function foo() { return 'bar'; } };
+register_singletons([UserService::class => $manager]);
+        </pre>
+        </td>
+    </tr>
     <!--<tr>
         <td></td>
         <td></td>
@@ -439,7 +455,7 @@ For the creators of the Laravel framework and all libraries that were used to cr
 - [x] method
 - [x] on
 - [x] random_float
-- [ ] register_singletons
+- [x] register_singletons
 - [ ] sometimes
 - [ ] will
 - [ ] will
