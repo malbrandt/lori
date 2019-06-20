@@ -112,7 +112,7 @@ cli()->getInput()->getArguments();
         </td>
     </tr>
     <tr>
-        <td>cli_in()</td>
+        <td>cli_in</td>
         <td>The shortcut for `cli()->getInput()`.</td>
         <td>
         <pre lang="php">
@@ -121,11 +121,55 @@ cli_in()->getArguments();
         </td>
     </tr>
     <tr>
-        <td>cli_out()</td>
+        <td>cli_out</td>
         <td>The shortcut for `cli()->getOutput()`.</td>
         <td>
         <pre lang="php">
 cli_out()->writeln('bar');
+        </pre>
+        </td>
+    </tr>
+    <tr>
+        <td>create_fake</td>
+        <td>The shortcut for factory($class)->create()</td>
+        <td>
+        <pre lang="php">
+// Pass model's class name:
+create_fake(\App\User::class);
+// Pass model's instance:
+create_fake(User::inRandomOrder()->first());
+// Specify number of fakes:
+create_fake(\App\User::class, 3);
+// Specify overrides:
+create_fake(\App\User::class, 1, ['email' => 'marek.malbrandt@gmail.com']);
+        </pre>
+        </td>
+    </tr>
+    <tr>
+        <td>equals</td>
+        <td>Safely compares two float numbers.</td>
+        <td>
+        <pre lang="php">
+0.1+0.1+0.1+0.1+0.1+0.1+0.1+0.1+0.1+0.1 == 1.0 // false
+equals(0.1+0.1+0.1+0.1+0.1+0.1+0.1+0.1+0.1+0.1, 1.0); // true
+equals(1.0, 1.0); // true
+equals(2.0, 1.0); // false
+        </pre>
+        </td>
+    </tr>
+    <tr>
+        <td>make_fake</td>
+        <td>The shortcut for factory($class)->make()</td>
+        <td>
+        <pre lang="php">
+// Pass model's class name:
+make_fake(\App\User::class);
+// Pass model's instance:
+make_fake(User::inRandomOrder()->first());
+// Specify number of fakes:
+make_fake(\App\User::class, 3);
+// Specify overrides:
+make_fake(\App\User::class, 1, ['email' => 'marek.malbrandt@gmail.com']);
         </pre>
         </td>
     </tr>
@@ -293,7 +337,7 @@ For the creators of the Laravel framework and all libraries that were used to cr
 - [x] cli_in
 - [x] cli_out
 - [x] create_fake
-- [ ] equals
+- [x] equals
 - [ ] was
 - [ ] fileline
 - [ ] flash_error

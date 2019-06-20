@@ -347,6 +347,37 @@ if (! function_exists('create_fake')) {
         return $count === 1 ? $created[0] : $created;
     }
 }
+if (!function_exists('equals')) {
+    /**
+     * Safely compares two float numbers if they are equal. This functions should
+     * be used instead of all equal (==) and identical (===) comparisions of
+     * float numbers, because during mathematical operations on small numbers,
+     * we are losing accuracy.
+     *
+     * Analyse example below:
+     * ```
+     * // Adding 0.1 ten times is not equal 1
+     * (0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1) === 1; // false
+     *
+     * // Using equals function, it returns correct result
+     * equals(0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1 + 0.1, 1) // true
+     * ```
+     *
+     * @param float $first   First number to compare.
+     * @param float $second  Second number to compare.
+     * @param float $epsilon Smallest acceptable difference.
+     *
+     * @return bool
+     * @since   0.11.5
+     */
+    function equals(
+        float $first,
+        float $second,
+        float $epsilon = 2.2204460492503e-16 /* PHP_FLOAT_EPSILON */
+    ): bool {
+        return abs($first - $second) < $epsilon;
+    }
+}
 if (!function_exists('make_fake')) {
     /**
      * A simple alias for Laravel's factory make method.
