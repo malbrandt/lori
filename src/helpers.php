@@ -390,7 +390,7 @@ if (! function_exists('fileline')) {
      * @return string
      * @see     \caller(), \method()
      * @since   0.12.6
-     * @todo unit tests
+     * @todo    unit tests
      */
     function fileline(
         int $backwards = 1,
@@ -405,6 +405,75 @@ if (! function_exists('fileline')) {
         }
         $path = $fullPath ? $file : basename($file);
         return $path . $separator . $line;
+    }
+}
+if (! function_exists('flash_error')) {
+    /**
+     * Flashes a message in Laravel's session under the key 'error'.
+     * When you provide second argument, it would be stored under the key 'errors'.
+     *
+     * @param string $message
+     * @param mixed  $errors
+     * @param string $messageKey
+     * @param string $errorsKey
+     *
+     * @since   0.13.6
+     */
+    function flash_error(
+        string $message,
+        $errors = null,
+        string $messageKey = 'error',
+        string $errorsKey = 'errors'
+    ): void {
+        if (! empty($message) && ! empty($messageKey)) {
+            session()->flash($messageKey, $message);
+        }
+
+        if ($errors !== null && ! empty($errorsKey)) {
+            session()->flash($errorsKey, $errors);
+        }
+    }
+}
+if (! function_exists('flash_info')) {
+    /**
+     * Flashes a message in Laravel's session under the key 'info'.
+     *
+     * @param string $message The message to flash.
+     * @param string $key     The key under the messages should be flashed (default: info).
+     *
+     * @since   0.13.6
+     */
+    function flash_info(string $message, $key = 'info'): void
+    {
+        session()->flash($key, $message);
+    }
+}
+if (! function_exists('flash_success')) {
+    /**
+     * Flashes a message in Laravel's session under the key 'success'.
+     *
+     * @param string $message The message to flash.
+     * @param string $key     The key under the messages should be flashed (default: success).
+     *
+     * @since   0.13.6
+     */
+    function flash_success(string $message, $key = 'success'): void
+    {
+        session()->flash($key, $message);
+    }
+}
+if (! function_exists('flash_warning')) {
+    /**
+     * Flashes a message in Laravel's session under the key 'warning'.
+     *
+     * @param string $message The message to flash.
+     * @param string $key     The key under the messages should be flashed (default: warning).
+     *
+     * @since   0.13.6
+     */
+    function flash_warning(string $message, $key = 'warning'): void
+    {
+        session()->flash($key, $message);
     }
 }
 if (! function_exists('make_fake')) {

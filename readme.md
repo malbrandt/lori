@@ -163,7 +163,6 @@ equals(2.0, 1.0); // false
         <td>
         <pre lang="php">
 <?php
-
 class UserController extends Controller
 {
     public function foo()
@@ -171,6 +170,48 @@ class UserController extends Controller
         fileline(); // UserController.php:7
     }
 }
+        </pre>
+        </td>
+    </tr>
+    <tr>
+        <td>flash_error</td>
+        <td>An alias for `session()->flash('error', $msg)`.</td>
+        <td>
+        <pre lang="php">
+flash_error('Message'); // flash error under "error" key
+flash_error('Message', ['Error1', 'Error2']); // flash message and errors (under "errors" key)
+flash_error('Message', null, 'user.error'); // flash message under "user.errors" key
+flash_error(null, ['Error3', 'Error4'], null, 'validation.errors'); // flash message under "validation.errors" key
+        </pre>
+        </td>
+    </tr>
+    <tr>
+        <td>flash_info</td>
+        <td>An alias for `session()->flash('info', $msg)`.</td>
+        <td>
+        <pre lang="php">
+flash_info('Foobar'); // flashes message under "info" key
+flash_info('Foobar', 'lori.info'); // flashes message under custom key: "lori.info"
+        </pre>
+        </td>
+    </tr>
+    <tr>
+        <td>flash_success</td>
+        <td>An alias for `session()->flash('success', $msg)`.</td>
+        <td>
+        <pre lang="php">
+flash_success('Foobar'); // flashes message under "success" key
+flash_success('Foobar', 'lori.success'); // flashes message under custom key: "lori.success"
+        </pre>
+        </td>
+    </tr>
+    <tr>
+        <td>flash_warning</td>
+        <td>An alias for `session()->flash('warning', $msg)`.</td>
+        <td>
+        <pre lang="php">
+flash_warning('Foobar'); // flashes message under "warning" key
+flash_warning('Foobar', 'lori.warning'); // flashes message under custom key: "lori.warning"
         </pre>
         </td>
     </tr>
@@ -356,10 +397,10 @@ For the creators of the Laravel framework and all libraries that were used to cr
 - [x] create_fake
 - [x] equals
 - [x] fileline
-- [ ] flash_error
-- [ ] flash_info
-- [ ] flash_success
-- [ ] flash_warning
+- [x] flash_error
+- [x] flash_info
+- [x] flash_success
+- [x] flash_warning
 - [ ] has_trait
 - [x] make_fake
 - [x] method
