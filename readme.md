@@ -292,7 +292,7 @@ For the creators of the Laravel framework and all libraries that were used to cr
 - [x] cli
 - [x] cli_in
 - [x] cli_out
-- [ ] create_fake
+- [x] create_fake
 - [ ] equals
 - [ ] was
 - [ ] fileline
@@ -301,7 +301,7 @@ For the creators of the Laravel framework and all libraries that were used to cr
 - [ ] flash_success
 - [ ] flash_warning
 - [ ] has_trait
-- [ ] make_fake
+- [x] make_fake
 - [x] method
 - [ ] on
 - [ ] random_float

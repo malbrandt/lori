@@ -185,7 +185,7 @@ if (! function_exists('carbonize')) {
         }
     }
 }
-if (!function_exists('clamp')) {
+if (! function_exists('clamp')) {
     /**
      * Clamps given value in the given range in an intuitive way.
      *
@@ -292,7 +292,7 @@ if (! function_exists('method')) {
         return $result;
     }
 }
-if (!function_exists('cli')) {
+if (! function_exists('cli')) {
     /**
      * @return \Malbrandt\Lori\Utils\Console|null
      * @since 0.9.5
@@ -302,7 +302,7 @@ if (!function_exists('cli')) {
         return app()->has('lori.cli') ? app('lori.cli') : null;
     }
 }
-if (!function_exists('cli_in')) {
+if (! function_exists('cli_in')) {
     /**
      * If app is running in console (i.e. executing some command),
      * it will return instance of input interface of that command.
@@ -315,7 +315,7 @@ if (!function_exists('cli_in')) {
         return ($cli = cli()) !== null ? $cli->getInput() : null;
     }
 }
-if (!function_exists('cli_out')) {
+if (! function_exists('cli_out')) {
     /**
      * If app is running in console (i.e. executing some command),
      * it will return instance of output interface of that command.
@@ -326,5 +326,43 @@ if (!function_exists('cli_out')) {
     function cli_out()
     {
         return ($cli = cli()) !== null ? $cli->getOutput() : null;
+    }
+}
+if (! function_exists('create_fake')) {
+    /**
+     * A simple alias for Laravel's factory make method.
+     *
+     * @param string|\Illuminate\Database\Eloquent\Model $class      The name of the class to fake or the model's instance
+     * @param int                                        $count      The number of instance you wan't to generate (default: 1)
+     * @param array                                      $attributes Attributes that would be overridden
+     *
+     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Support\Collection craeted model or models collection
+     * @since   0.10.5
+     * @todo unit tests
+     */
+    function create_fake($class, int $count = 1, array $attributes = [])
+    {
+        $created = factory(classify($class), $count)->create($attributes);
+
+        return $count === 1 ? $created[0] : $created;
+    }
+}
+if (!function_exists('make_fake')) {
+    /**
+     * A simple alias for Laravel's factory make method.
+     *
+     * @param string $class      The name of the class to fake or the model's instance
+     * @param int    $count      The number of instance you wan't to generate
+     * @param array  $attributes Attributes that would be overriden
+     *
+     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Collection created model or models collection
+     * @since   0.10.5
+     * @todo unit tests
+     */
+    function make_fake(string $class, int $count = 1, array $attributes = [])
+    {
+        $made = factory(classify($class), $count)->make($attributes);
+
+        return $count === 1 ? $made[0] : $made;
     }
 }
