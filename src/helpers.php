@@ -526,7 +526,7 @@ if (! function_exists('on')) {
      * @throws \InvalidArgumentException If event name is not passed as a string.
      *
      * @since   0.15.7
-     * @todo unit tests
+     * @todo    unit tests
      */
     function on($events, callable $listener)
     {
@@ -543,5 +543,26 @@ if (! function_exists('on')) {
 
         // Register event listener(s).
         Event::listen($events, $listener);
+    }
+}
+if (! function_exists('random_float')) {
+    /**
+     * Generates a cryptographically secure random float from given range.
+     *
+     * @param int  $min
+     * @param int  $max
+     * @param bool $maxInclusive (Optional) Inclusive pick (default: true).
+     *
+     * @return float Random number from given range.
+     * @throws \Exception if it was not possible to gather sufficient entropy.
+     * @see   \random_int()
+     * @since 0.16.7
+     * @todo unit tests
+     */
+    function random_float($min = 0, $max = 1, $maxInclusive = true): float
+    {
+        return
+            $min + random_int(0, mt_getrandmax() - ($maxInclusive ? 0 : 1))
+            / mt_getrandmax() * ($max - $min);
     }
 }

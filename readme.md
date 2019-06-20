@@ -265,6 +265,17 @@ on(CommandStarting::class, function ($event) {
         </pre>
         </td>
     </tr>
+    <tr>
+        <td>random_float</td>
+        <td>Generates a cryptographically secure random float from given range.</td>
+        <td>
+        <pre lang="php">
+random_float(); // random float in range: 0 < x <= 1 (max inclusive)
+random_float(1, 2, false); // random float in range: 1 < x < 2 (max exclusive)
+random_float(1, 10, false); // random float in range: 1 < x < 10 (max exclusive)
+        </pre>
+        </td>
+    </tr>
     <!--<tr>
         <td></td>
         <td></td>
@@ -331,7 +342,7 @@ Coding conventions are the same as in Laravel framework. The code should be writ
 If you want to add your 5 cents to this library, you can do this in many ways.
 Here are few of them:
 * propose change: a new function, change of some function (paremetrize its algorithm settings?), supplementing the documentation (where?), adding an example (for which function?), etc.
-* if something is incomprehensible or too poorly exaplined - inform about it as fast as possible!
+* if something is incomprehensible or too poorly explained - inform about it as fast as possible!
 * take part in a discussion in existing Issue Tracker topics,
 * propose interesting concept (concepts examples: batch insert, DTO, autofactories, dynamic parameters),
 * deal with the function from the to-do list,
@@ -427,7 +438,7 @@ For the creators of the Laravel framework and all libraries that were used to cr
 - [x] make_fake
 - [x] method
 - [x] on
-- [ ] random_float
+- [x] random_float
 - [ ] register_singletons
 - [ ] sometimes
 - [ ] will
