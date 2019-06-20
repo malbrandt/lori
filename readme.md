@@ -164,11 +164,9 @@ equals(2.0, 1.0); // false
         <pre lang="php">
 class UserController extends Controller
 {
-    public function foo()
-    {
-        fileline(); // UserController.php:5
-    }
+    public static function foo() { return fileline(); }
 }
+UserController::foo(); // UserController.php:3
         </pre>
         </td>
     </tr>
@@ -253,6 +251,17 @@ method(); // caller as valid PHP callable (does not support Closures)
 method(3); // caller of caller (as a callable)
 method(2, METHOD_FORMAT_ACTION); // returns caller in format: FooClass@barMethod
 method(2, METHOD_FORMAT_ACTION_FQCN); // returns caller in format: Class\Namespace\Foo@biz
+        </pre>
+        </td>
+    </tr>
+    <tr>
+        <td>on</td>
+        <td>Register event listeners. Shortcut for Event::listen($events, $callback).</td>
+        <td>
+        <pre lang="php">
+on(CommandStarting::class, function ($event) {
+    $event->output->writeln("Executing command: {$event->command}."); 
+});
         </pre>
         </td>
     </tr>
@@ -417,7 +426,7 @@ For the creators of the Laravel framework and all libraries that were used to cr
 - [x] has_trait
 - [x] make_fake
 - [x] method
-- [ ] on
+- [x] on
 - [ ] random_float
 - [ ] register_singletons
 - [ ] sometimes

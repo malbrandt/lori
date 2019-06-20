@@ -242,60 +242,6 @@ if (! function_exists('classify')) {
         }
     }
 }
-if (! function_exists('method')) {
-    /**
-     * Returns the caller name in Laravel's action format ("Class@method").
-     *
-     * @param int $backwards How many steps in call stack we should go backwards? Must be greater then 0.
-     * @param int $format    Format to use
-     *
-     * @return array|string|null Caller class and method name in Laravel's action format.
-     * @see     \caller() Returns caller part or more details.
-     * @see     \fileline() Returns file and line from which call was invoked.
-     * @since   0.5.3
-     */
-    function method(
-        int $backwards = 2,
-        int $format = METHOD_FORMAT_CALLABLE
-    ) {
-        $result = null;
-
-        if (($caller = caller($backwards)) === null) {
-            return null;
-        }
-        $isClosure = strpos($caller['function'], '{closure}') > -1;
-        if ($isClosure) {
-            // TODO: is it possible to return callable Closure (caller) using some reflection/debug backtrace techniques?
-            return null;
-        }
-
-        switch ($format) {
-            case METHOD_FORMAT_ACTION:
-                $result = class_basename($caller['class']) . '@' . $caller['function'];
-                break;
-
-            case METHOD_FORMAT_ACTION_FQCN:
-                $result = $caller['class'] . '@' . $caller['function'];
-                break;
-
-            case METHOD_FORMAT_CALLABLE:
-                if (! isset($caller['class'])) {
-                    $result = $caller['function'];
-                } elseif (isset($caller['object'])) {
-                    $result = [$caller['object'], $caller['function']];
-                } else {
-                    $result = $caller['class'] . '::' . $caller['function'];
-                }
-
-                break;
-
-            default:
-                throw new InvalidArgumentException('Invalid result format. Tip: use one of the constants prefixed "METHOD_FORMAT_*".');
-        }
-
-        return $result;
-    }
-}
 if (! function_exists('cli')) {
     /**
      * @return \Malbrandt\Lori\Utils\Console|null
@@ -512,5 +458,90 @@ if (! function_exists('make_fake')) {
         $made = factory(classify($class), $count)->make($attributes);
 
         return $count === 1 ? $made[0] : $made;
+    }
+}
+if (! function_exists('method')) {
+    /**
+     * Returns the caller name in Laravel's action format ("Class@method").
+     *
+     * @param int $backwards How many steps in call stack we should go backwards? Must be greater then 0.
+     * @param int $format    Format to use
+     *
+     * @return array|string|null Caller class and method name in Laravel's action format.
+     * @see     \caller() Returns caller part or more details.
+     * @see     \fileline() Returns file and line from which call was invoked.
+     * @since   0.5.3
+     */
+    function method(
+        int $backwards = 2,
+        int $format = METHOD_FORMAT_CALLABLE
+    ) {
+        $result = null;
+
+        if (($caller = caller($backwards)) === null) {
+            return null;
+        }
+        $isClosure = strpos($caller['function'], '{closure}') > -1;
+        if ($isClosure) {
+            // TODO: is it possible to return callable Closure (caller) using some reflection/debug backtrace techniques?
+            return null;
+        }
+
+        switch ($format) {
+            case METHOD_FORMAT_ACTION:
+                $result = class_basename($caller['class']) . '@' . $caller['function'];
+                break;
+
+            case METHOD_FORMAT_ACTION_FQCN:
+                $result = $caller['class'] . '@' . $caller['function'];
+                break;
+
+            case METHOD_FORMAT_CALLABLE:
+                if (! isset($caller['class'])) {
+                    $result = $caller['function'];
+                } elseif (isset($caller['object'])) {
+                    $result = [$caller['object'], $caller['function']];
+                } else {
+                    $result = $caller['class'] . '::' . $caller['function'];
+                }
+
+                break;
+
+            default:
+                throw new InvalidArgumentException('Invalid result format. Tip: use one of the constants prefixed "METHOD_FORMAT_*".');
+        }
+
+        return $result;
+    }
+}
+if (! function_exists('on')) {
+    /**
+     * Registers event listener(s).
+     *
+     * @param string|string[] $events   Name(s) of event(s) to listen.
+     * @param callable        $listener A callback that would receive event
+     *                                  instance.
+     *
+     * @return void
+     * @throws \InvalidArgumentException If event name is not passed as a string.
+     *
+     * @since   0.15.7
+     * @todo unit tests
+     */
+    function on($events, callable $listener)
+    {
+        // Validate arguments.
+        $events = Arr::wrap($events);
+        foreach ($events as $event) {
+            if (! is_string($event)) {
+                throw new InvalidArgumentException(
+                    'Invalid event name. Tip: all event names must be' .
+                    ' strings with event alias or event class name.'
+                );
+            }
+        }
+
+        // Register event listener(s).
+        Event::listen($events, $listener);
     }
 }
