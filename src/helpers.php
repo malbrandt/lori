@@ -572,7 +572,7 @@ if (! function_exists('register_singletons')) {
      *
      * @param array $singletons Mapping: singleton's alias to name of the class
      *
-     * @todo unit tests
+     * @todo  unit tests
      * @since 0.17.7
      */
     function register_singletons(array $singletons): void
@@ -599,5 +599,32 @@ if (! function_exists('register_singletons')) {
                 );
             }
         }
+    }
+}
+if (! function_exists('sometimes')) {
+    /**
+     * Returns drawn value with specified probability.
+     *
+     * @param mixed      $drawn       Value that will be returned if the draw was successful.
+     * @param float      $probability Probability of picking drawn value after lottery.
+     * @param null|mixed $notDrawn    The value that will be returned when the draw fails.
+     *
+     * @return mixed|null Drawn value or second value (default: null) if not drawn.
+     * @throws \Exception
+     * @since   0.18.7
+     * @todo unit tests
+     */
+    function sometimes($drawn, float $probability = 0.1, $notDrawn = null)
+    {
+        $clamped = clamp($probability, 0, 1);
+        if (! equals($clamped, $probability)) {
+            throw new InvalidArgumentException(
+                'Invalid probability value. Tip: probability should be given in range: 0 <= x <= 1.'
+            );
+        }
+
+        $random = random_float(0.0, 1.0, true);
+
+        return $random > $probability ? $drawn : $notDrawn;
     }
 }

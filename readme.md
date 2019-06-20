@@ -292,6 +292,17 @@ register_singletons([UserService::class => $manager]);
         </pre>
         </td>
     </tr>
+    <tr>
+        <td>sometimes</td>
+        <td>Returns drawn value with specified probability. Can be useful for generating fake data.</td>
+        <td>
+        <pre lang="php">
+sometimes('foo'); // returns 'foo' with 10% chance (null otherwise)
+sometimes('bar', 0.3); // returns 'bar' with 30% chance (null otherwise)
+sometimes('biz', 0.7, 'buzz'); // returns 'biz' with 70% chance ('buzz' otherwise)
+        </pre>
+        </td>
+    </tr>
     <!--<tr>
         <td></td>
         <td></td>
@@ -456,7 +467,7 @@ For the creators of the Laravel framework and all libraries that were used to cr
 - [x] on
 - [x] random_float
 - [x] register_singletons
-- [ ] sometimes
+- [x] sometimes
 - [ ] will
 - [ ] will
 - [ ] str_between
