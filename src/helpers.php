@@ -160,7 +160,11 @@ if (! function_exists('carbonize')) {
     {
         switch (true) {
             case is_string($date):
-                return Illuminate\Support\Carbon::parse($date);
+                try {
+                    return Illuminate\Support\Carbon::parse($date);
+                } catch (Throwable $e) {
+                    return null;
+                }
 
             case $date instanceof \Carbon\Carbon:
                 return Illuminate\Support\Carbon::create(
@@ -474,6 +478,21 @@ if (! function_exists('flash_warning')) {
     function flash_warning(string $message, $key = 'warning'): void
     {
         session()->flash($key, $message);
+    }
+}
+if (! function_exists('has_trait')) {
+    /**
+     * Examines if given object or class uses given trait.
+     *
+     * @param string $trait  The trait name (FQCN).
+     * @param mixed  $object Class or object to check.
+     *
+     * @return bool True, if given object uses given trait; false otherwise.
+     * @since   0.14.7
+     */
+    function has_trait(string $trait, $object): bool
+    {
+        return in_array(classify($trait), class_uses_recursive($object), true);
     }
 }
 if (! function_exists('make_fake')) {

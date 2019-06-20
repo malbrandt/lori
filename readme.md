@@ -162,12 +162,11 @@ equals(2.0, 1.0); // false
         <td>Returns file and line number, from which the functions was called.</td>
         <td>
         <pre lang="php">
-<?php
 class UserController extends Controller
 {
     public function foo()
     {
-        fileline(); // UserController.php:7
+        fileline(); // UserController.php:5
     }
 }
         </pre>
@@ -212,6 +211,20 @@ flash_success('Foobar', 'lori.success'); // flashes message under custom key: "l
         <pre lang="php">
 flash_warning('Foobar'); // flashes message under "warning" key
 flash_warning('Foobar', 'lori.warning'); // flashes message under custom key: "lori.warning"
+        </pre>
+        </td>
+    </tr>
+    <tr>
+        <td>has_trait</td>
+        <td>Examines if a class/object has given trait.</td>
+        <td>
+        <pre lang="php">
+// Namespace omitted for readability
+$obj = new class() { use ValidatesRequests; };
+has_trait(ValidatesRequests::class, $obj); // true
+has_trait(FooTrait::class, $obj); // false
+// Using class name (we're assuming, that Controller class uses ValidatesRequest trait)
+has_trait(ValidatesRequests::class, Controller::class); // true
         </pre>
         </td>
     </tr>
@@ -401,7 +414,7 @@ For the creators of the Laravel framework and all libraries that were used to cr
 - [x] flash_info
 - [x] flash_success
 - [x] flash_warning
-- [ ] has_trait
+- [x] has_trait
 - [x] make_fake
 - [x] method
 - [ ] on

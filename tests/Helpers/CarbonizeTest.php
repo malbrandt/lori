@@ -40,24 +40,27 @@ class CarbonizeTest extends TestCase
         $actual = Carbon::parse(self::DATES[0]);
         $carbonized = carbonize($actual);
         $this->assertInstanceOf(Carbon::class, $carbonized);
-        $this->assertNotEquals($actual, $carbonized);
+        $first = spl_object_hash($actual);
+        $second = spl_object_hash($carbonized);
+        $this->assertNotEquals($first, $second);
     }
 
     /** @test */
     public function converts_datetime_objects()
     {
-        $this->assertInstanceOf(Carbon::class, new DateTime());
+        $this->assertInstanceOf(Carbon::class, carbonize(new DateTime()));
     }
 
     /** @test */
     public function converts_datetime_immutable_objects()
     {
-        $this->assertInstanceOf(Carbon::class, new DateTimeImmutable());
+        $this->assertInstanceOf(Carbon::class,
+            carbonize(new DateTimeImmutable()));
     }
 
     /** @test */
     public function returns_null_if_cannot_unify()
     {
-        $this->assertNull('foobar');
+        $this->assertNull(carbonize('foobar'));
     }
 }
