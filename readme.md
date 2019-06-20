@@ -23,13 +23,27 @@ Below you can find global helper functions reference with short description and 
         <td>
         <pre lang="php">
 // Read value of the non accessible property (private or protected).
-$object = new class { private $foo = 'bar'; };
+$object = new class() { private $foo = 'bar'; };
 $value = access_prop($object, 'foo'); // $value = 'bar'
 
 // Set value to the non accessible property.
-$object = new class { protected $foo = 'bar'; };
+$object = new class() { protected $foo = 'bar'; };
 access_prop($object, 'foo', 'biz'); // $object->foo = 'biz'
 access_prop($object, 'foo', null, true); // $object->foo = null
+        </pre>
+        </td>
+    </tr>
+    <tr>
+        <td>call_method</td>
+        <td>Calls class method - even if it's not accessible (private/protected).</td>
+        <td>
+        <pre lang="php">
+// Instance methods
+$obj = new class() { private function foo() { return 'foo'; } };
+$result = call_method('foo', $obj); // 'foo'
+// Static methods
+$obj = new class() { protected static function bar($args) { return $args; } };
+$result = call_method('bar', $obj, [1, 2, 3]); // [1, 2, 3]
         </pre>
         </td>
     </tr>
@@ -229,7 +243,7 @@ For the creators of the Laravel framework and all libraries that were used to cr
 
 - [x] access_prop
 - [ ] batch_insert
-- [ ] call_method
+- [x] call_method
 - [x] caller
 - [x] carbonize
 - [ ] clamp

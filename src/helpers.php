@@ -47,6 +47,51 @@ if (! function_exists('access_prop')) {
         return $value;
     }
 }
+if (! function_exists('call_method')) {
+    /**
+     * Force calls method - even if it's not accessible (if its private/protected).
+     *
+     * @param string               $method  Method name to invoke
+     * @param object|string        $object  Object instance or class name (if method is static).
+     * @param array|mixed|\Closure ...$args optional arguments that will be passed. Can be passed as closure, to defer the moment of args resolving.
+     *
+     * @return mixed
+     * @throws \ReflectionException
+     * @see     \access_prop() Allows to access private or protected class/object property.
+     * @since   0.7.5
+     */
+    function call_method(string $method, $object, ...$args)
+    {
+        if (! is_object($object) || ! class_exists(classify($object))) {
+            $class = classify($object);
+            throw new InvalidArgumentException(
+                'Invalid value. Tip: pass object instance or a class name as' .
+                " \$object argument. Passed value's type: {$class}."
+            );
+        }
+
+        $reflection = new ReflectionClass($object);
+        $method = $reflection->getMethod($method);
+
+        // Remember current accessibility of the method to eventually restore it later.
+        $wasAccessible = ($method->getModifiers() & ReflectionMethod::IS_PUBLIC) !== 0;
+
+        // Check if closure was passed to resolve args from it.
+        if (! empty($args) && is_callable($args[0])) {
+            $args = [call_user_func($args[0])];
+        }
+
+        $method->setAccessible(true);
+        $result = $method->invokeArgs($object, $args);
+
+        // If needed, restore previous modifier.
+        if (! $wasAccessible) {
+            $method->setAccessible(false);
+        }
+
+        return $result;
+    }
+}
 if (! function_exists('caller')) {
     /**
      * Returns the caller's method name. You can obtain other parts of caller details if you specify
