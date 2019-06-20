@@ -102,6 +102,34 @@ classify('test'); // 'string'
         </td>
     </tr>
     <tr>
+        <td>cli</td>
+        <td>Returns console helper instance. Could be used for tracing.</td>
+        <td>
+        <pre lang="php">
+cli()->getOutput()->writeln('foo');
+cli()->getInput()->getArguments();
+        </pre>
+        </td>
+    </tr>
+    <tr>
+        <td>cli_in()</td>
+        <td>The shortcut for `cli()->getInput()`.</td>
+        <td>
+        <pre lang="php">
+cli_in()->getArguments();
+        </pre>
+        </td>
+    </tr>
+    <tr>
+        <td>cli_out()</td>
+        <td>The shortcut for `cli()->getOutput()`.</td>
+        <td>
+        <pre lang="php">
+cli_out()->writeln('bar');
+        </pre>
+        </td>
+    </tr>
+    <tr>
         <td>method</td>
         <td>Returns caller in various useful formats.</td>
         <td>
@@ -222,6 +250,7 @@ For the creators of the Laravel framework and all libraries that were used to cr
 ### Concepts
 
 - [ ] DTO
+- [ ] CLI
 - [ ] Automemoization
 - [ ] Memoizaiton
 - [ ] CreateOrIncrement
@@ -258,11 +287,11 @@ For the creators of the Laravel framework and all libraries that were used to cr
 - [x] call_method
 - [x] caller
 - [x] carbonize
-- [ ] clamp
+- [x] clamp
 - [x] classify
-- [ ] cli
-- [ ] cli_in
-- [ ] cli_out
+- [x] cli
+- [x] cli_in
+- [x] cli_out
 - [ ] create_fake
 - [ ] equals
 - [ ] was

@@ -292,3 +292,39 @@ if (! function_exists('method')) {
         return $result;
     }
 }
+if (!function_exists('cli')) {
+    /**
+     * @return \Malbrandt\Lori\Utils\Console|null
+     * @since 0.9.5
+     */
+    function cli()
+    {
+        return app()->has('lori.cli') ? app('lori.cli') : null;
+    }
+}
+if (!function_exists('cli_in')) {
+    /**
+     * If app is running in console (i.e. executing some command),
+     * it will return instance of input interface of that command.
+     *
+     * @return \Symfony\Component\Console\Input\InputInterface|null Input interface when running command or null otherwise.
+     * @since   0.9.5
+     */
+    function cli_in()
+    {
+        return ($cli = cli()) !== null ? $cli->getInput() : null;
+    }
+}
+if (!function_exists('cli_out')) {
+    /**
+     * If app is running in console (i.e. executing some command),
+     * it will return instance of output interface of that command.
+     *
+     * @return \Symfony\Component\Console\Output\OutputInterface|null Output interface when running command or null otherwise.
+     * @since   0.9.5
+     */
+    function cli_out()
+    {
+        return ($cli = cli()) !== null ? $cli->getOutput() : null;
+    }
+}

@@ -2,7 +2,10 @@
 
 namespace Malbrandt\Lori;
 
+use Illuminate\Console\Events\CommandStarting;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
+use Malbrandt\Lori\Utils\Console;
 
 class LoriServiceProvider extends ServiceProvider
 {
@@ -19,10 +22,16 @@ class LoriServiceProvider extends ServiceProvider
         // $this->loadRoutesFrom(__DIR__ . '/routes.php');
 
         // Publishing is only necessary when using the CLI.
-        if ($this->app->runningInConsole())
-        {
+        if ($this->app->runningInConsole()) {
             $this->bootForConsole();
         }
+
+        Event::listen(CommandStarting::class,
+            function (CommandStarting $event) {
+                app()->singleton('lori.cli', function () use ($event) {
+                    return Console::capture($event);
+                });
+            });
     }
 
 
