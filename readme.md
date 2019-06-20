@@ -158,6 +158,23 @@ equals(2.0, 1.0); // false
         </td>
     </tr>
     <tr>
+        <td>fileline</td>
+        <td>Returns file and line number, from which the functions was called.</td>
+        <td>
+        <pre lang="php">
+<?php
+
+class UserController extends Controller
+{
+    public function foo()
+    {
+        fileline(); // UserController.php:7
+    }
+}
+        </pre>
+        </td>
+    </tr>
+    <tr>
         <td>make_fake</td>
         <td>The shortcut for factory($class)->make()</td>
         <td>
@@ -338,8 +355,7 @@ For the creators of the Laravel framework and all libraries that were used to cr
 - [x] cli_out
 - [x] create_fake
 - [x] equals
-- [ ] was
-- [ ] fileline
+- [x] fileline
 - [ ] flash_error
 - [ ] flash_info
 - [ ] flash_success

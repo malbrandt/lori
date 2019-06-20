@@ -338,7 +338,7 @@ if (! function_exists('create_fake')) {
      *
      * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Support\Collection craeted model or models collection
      * @since   0.10.5
-     * @todo unit tests
+     * @todo    unit tests
      */
     function create_fake($class, int $count = 1, array $attributes = [])
     {
@@ -347,7 +347,7 @@ if (! function_exists('create_fake')) {
         return $count === 1 ? $created[0] : $created;
     }
 }
-if (!function_exists('equals')) {
+if (! function_exists('equals')) {
     /**
      * Safely compares two float numbers if they are equal. This functions should
      * be used instead of all equal (==) and identical (===) comparisions of
@@ -368,17 +368,46 @@ if (!function_exists('equals')) {
      * @param float $epsilon Smallest acceptable difference.
      *
      * @return bool
-     * @since   0.11.5
+     * @since   0.11.6
      */
     function equals(
         float $first,
         float $second,
         float $epsilon = 2.2204460492503e-16 /* PHP_FLOAT_EPSILON */
-    ): bool {
+    ): bool
+    {
         return abs($first - $second) < $epsilon;
     }
 }
-if (!function_exists('make_fake')) {
+if (! function_exists('fileline')) {
+    /**
+     * Returns the file and line number from which function was called in format: "file.ext:line",
+     * i.e. 'somefile.php:12'. By default, it does not include full file path.
+     *
+     * @param bool   $fullPath  (Optional) True, if should return full path of file.
+     * @param string $separator (Optional) Separator that will implode path with line.
+     *
+     * @return string
+     * @see     \caller(), \method()
+     * @since   0.12.6
+     * @todo unit tests
+     */
+    function fileline(
+        int $backwards = 1,
+        bool $fullPath = false,
+        string $separator = ':'
+    ): string {
+        $caller = caller($backwards, null);
+        $file = $caller['file'] ?? null;
+        $line = $caller['line'] ?? null;
+        if ($file === null || $line === null) {
+            throw new LogicException('Cannot examine caller\'s file/line or both.');
+        }
+        $path = $fullPath ? $file : basename($file);
+        return $path . $separator . $line;
+    }
+}
+if (! function_exists('make_fake')) {
     /**
      * A simple alias for Laravel's factory make method.
      *
@@ -388,7 +417,7 @@ if (!function_exists('make_fake')) {
      *
      * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Collection created model or models collection
      * @since   0.10.5
-     * @todo unit tests
+     * @todo    unit tests
      */
     function make_fake(string $class, int $count = 1, array $attributes = [])
     {
