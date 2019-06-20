@@ -185,6 +185,32 @@ if (! function_exists('carbonize')) {
         }
     }
 }
+if (!function_exists('clamp')) {
+    /**
+     * Clamps given value in the given range in an intuitive way.
+     *
+     * @param float      $value The number to be clamped
+     * @param float|null $min   (Optional) Lower bound of clamp
+     * @param float|null $max   (Optional) Upper bound of clamp
+     *
+     * @return float Clamped value
+     * @since   0.8.5
+     */
+    function clamp(float $value, $min = null, $max = null): float
+    {
+        if (null === $min && null === $max) {
+            return $value;
+        }
+
+        if (null !== $min && $value < $min) {
+            return (float)$min;
+        } elseif (null !== $max && $value > $max) {
+            return (float)$max;
+        } else {
+            return $value;
+        }
+    }
+}
 if (! function_exists('classify')) {
     /**
      * Returns class name of given object, if object was passed or variable type, if passed value-type

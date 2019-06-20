@@ -76,6 +76,18 @@ $carbon = carbonize('foobar'); // null
         </td>
     </tr>
     <tr>
+        <td>clamp</td>
+        <td>Clamps value in given range.</td>
+        <td>
+        <pre lang="php">
+$clamped = clamp(10); // 10.0
+$clamped = clamp(10, 5); // 5.0
+$clamped = clamp(10, 5, 15); // 5.0
+$clamped = clamp(20, 5, 15); // 15.0
+        </pre>
+        </td>
+    </tr>
+    <tr>
         <td>classify</td>
         <td>Returns type of the variable (value types) or a class name (reference types).</td>
         <td>
