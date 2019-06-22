@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
 if (! function_exists('access_prop')) {
@@ -796,5 +797,30 @@ if (! function_exists('str_remove')) {
         }
 
         return $haystack;
+    }
+}
+if (! function_exists('model_table')) {
+    /**
+     * Returns table model's table name.
+     *
+     * @param \Illuminate\Database\Eloquent\Model|string $model Model instance or model's class name (FQCN).
+     *
+     * @since 0.22.8
+     * @return string The name of model's table.
+     */
+    function model_table($model): string
+    {
+        if (is_string($model) && class_exists($model)
+            && method_exists($model, 'getTable')) {
+            // When passed valid model's class name, instantiate the class and call proper method.
+            return (new $model)->getTable();
+        } elseif ($model instanceof Model) {
+            // When model is already an instance of Eloquent Model
+            return $model->getTable();
+        } else {
+            throw new InvalidArgumentException(
+                'Wrong value passed. Hint: you need to pass model\'s class name (FQCN) or model\'s class instance.'
+            );
+        }
     }
 }

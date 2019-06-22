@@ -370,6 +370,17 @@ str_remove('Foo Bar Biz', 'Buzz'); // 'Foo Bar Biz'
         </pre>
         </td>
     </tr>
+    <tr>
+        <td>model_table</td>
+        <td>Returns the name of model's table.</td>
+        <td>
+        <pre lang="php">
+model_table(\App\User::class); // 'users' (passed class name)
+model_table(new \App\User());  // 'users' (passed model's instance)
+model_table('FooBar');         // throws InvalidArgumentException when cannot examine
+        </pre>
+        </td>
+    </tr>
     <!--<tr>
         <td></td>
         <td></td>
@@ -539,6 +550,6 @@ For the creators of the Laravel framework and all libraries that were used to cr
 - [x] to_string
 - [x] str_crop
 - [x] str_remove
-- [ ] table
+- [x] model_table
 - [ ] trace
 - [ ] testing
