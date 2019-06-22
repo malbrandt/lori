@@ -282,12 +282,14 @@ random_float(1, 10, false); // random float in range: 1 < x < 10 (max exclusive)
         <td>
         <pre lang="php">
 // Pass class name (FQCN)
-register_singletons([UserService::class => UserService::class]);
+register_singletons([UserService::class => UserServiceImpl::class]);
 // Pass Closure that resolves singleton instance
-$resolver = function () { return new UserService; };
+$resolver = function () { return new UserServiceImpl(); };
 register_singletons([UserService::class => $resolver]);
 // Pass object instance that should be a singleton:
-$manager = new class () { private function foo() { return 'bar'; } };
+$manager = new class () implements UserService {
+    private function foo() { return 'bar'; } 
+};
 register_singletons([UserService::class => $manager]);
         </pre>
         </td>
@@ -300,6 +302,27 @@ register_singletons([UserService::class => $manager]);
 sometimes('foo'); // returns 'foo' with 10% chance (null otherwise)
 sometimes('bar', 0.3); // returns 'bar' with 30% chance (null otherwise)
 sometimes('biz', 0.7, 'buzz'); // returns 'biz' with 70% chance ('buzz' otherwise)
+        </pre>
+        </td>
+    </tr>
+    <tr>
+        <td>str_between</td>
+        <td>Returns part of a string between two string.</td>
+        <td>
+        <pre lang="php">
+str_between('Foo Bar Bizz Buzz'); // 'Foo Bar Bizz Buzz' 
+str_between('Foo Bar Bizz Buzz', 'Bar ', ' Buzz'); // 'Bizz' 
+str_between('Foo Bar Bizz Buzz', 'Foo ', ' Buzz', true); // 'Bar Bizz Buzz' 
+// Cuts from the beginning when cannot find cut's left bound
+str_between('Foo Bar Bizz Buzz', 'ZZZ ', ' Buzz'); // 'Foo Bar Bizz '
+str_between('Foo Bar Bizz Buzz', null, ' Buzz'); // 'Foo Bar Bizz '
+// Cuts to the end when cannot find cut's right bound
+str_between('Foo Bar Bizz Buzz', 'Foo ', 'Bizzz'); // 'Bar Bizz Buzz'
+str_between('Foo Bar Bizz Buzz', 'Foo ', null); // 'Bar Bizz Buzz'
+// Returns an empty string when left bound is equal to right bound
+str_between('Foo Bar Bizz Buzz', 'Bizz ', 'Bizz '); // ''
+str_between(''); // ''
+str_between(null); // null
         </pre>
         </td>
     </tr>
@@ -468,9 +491,7 @@ For the creators of the Laravel framework and all libraries that were used to cr
 - [x] random_float
 - [x] register_singletons
 - [x] sometimes
-- [ ] will
-- [ ] will
-- [ ] str_between
+- [x] str_between
 - [ ] to_string
 - [ ] str_crop
 - [ ] str_remove

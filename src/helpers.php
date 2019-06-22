@@ -612,7 +612,7 @@ if (! function_exists('sometimes')) {
      * @return mixed|null Drawn value or second value (default: null) if not drawn.
      * @throws \Exception
      * @since   0.18.7
-     * @todo unit tests
+     * @todo    unit tests
      */
     function sometimes($drawn, float $probability = 0.1, $notDrawn = null)
     {
@@ -626,5 +626,55 @@ if (! function_exists('sometimes')) {
         $random = random_float(0.0, 1.0, true);
 
         return $random > $probability ? $drawn : $notDrawn;
+    }
+}
+if (! function_exists('str_between')) {
+    /**
+     * TODO: handle -1 values for $cropStart and $cropEnd
+     * Returns string between given bounds.
+     *
+     * @param string      $string
+     * @param string|null $left  The beginning of cut. If null passed, function will cut from string's beginning.
+     * @param string|null $right The end of cut. If null passed, function will cut to the end of string.
+     * @param bool        $inclusive Whether we should include passed bounds in returned string.
+     *
+     * @return string|null String between given bounds.
+     * @since 0.19.8
+     * @todo unit tests - this simple function have mane possible scenarios
+     */
+    function str_between(
+        $string,
+        $left = null,
+        $right = null,
+        bool $inclusive = false
+    ) {
+        // We don't have anything to cut.
+        if (empty($string) || ($left === null && $right === null)) {
+            return $string;
+        }
+        // Find index of cut's beginning. If left bound is not found, we'll cut from the start.
+        $leftStart = strpos($string, $left);
+        $begin = clamp($leftStart ?: 0, 0);
+
+        // Find cut's end. If cannot find right bound of cut, we'll cut to the end.
+        $rightStart = strpos($string, $right);
+        $strlen = strlen($string);
+        $end = clamp($rightStart ?: $strlen, 0, $strlen);
+
+        // Prepare inclusion of search bounds in returned string.
+        if (! $inclusive) {
+            if ($left !== null && $leftStart && $left !== $right) {
+                $begin += strlen($left);
+            }
+        }
+
+        if ($begin > $end) {
+            // Reverse the string, if begin is after the end.
+            $string = strrev($string);
+        } elseif ($begin === $end) {
+            return '';
+        }
+
+        return mb_substr($string, $begin, $end);
     }
 }
