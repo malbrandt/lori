@@ -630,17 +630,16 @@ if (! function_exists('sometimes')) {
 }
 if (! function_exists('str_between')) {
     /**
-     * TODO: handle -1 values for $cropStart and $cropEnd
      * Returns string between given bounds.
      *
      * @param string      $string
-     * @param string|null $left  The beginning of cut. If null passed, function will cut from string's beginning.
-     * @param string|null $right The end of cut. If null passed, function will cut to the end of string.
+     * @param string|null $left      The beginning of cut. If null passed, function will cut from string's beginning.
+     * @param string|null $right     The end of cut. If null passed, function will cut to the end of string.
      * @param bool        $inclusive Whether we should include passed bounds in returned string.
      *
      * @return string|null String between given bounds.
      * @since 0.19.8
-     * @todo unit tests - this simple function have mane possible scenarios
+     * @todo  unit tests - this simple function have mane possible scenarios
      */
     function str_between(
         $string,
@@ -676,5 +675,80 @@ if (! function_exists('str_between')) {
         }
 
         return mb_substr($string, $begin, $end);
+    }
+}
+if (! function_exists('to_string')) {
+    /**
+     * Converts given value to it's closest string representation.
+     *
+     * Example outputs:
+     * ```
+     * to_string("string");             // "string"
+     * to_string(true);                 // "true"
+     * to_string(false);                // "false"
+     * to_string(123);                  // "123"
+     * to_string(45.67);                // "45.67"
+     * to_string(null);                 // "null"
+     * to_string([1, 2]);               // "[1,2]"
+     * to_string($object);              // json_encode($object)
+     * to_string($simpleXmlElement);    // $simpleXmlElement->asXML()
+     * ```
+     *
+     * @param mixed $value Value to be converted.
+     *
+     * @return string Closest string representation of given value.
+     * @since 0.20.8
+     */
+    function to_string($value): string
+    {
+        $string = '';
+        $encode = function ($value) {
+            return function_exists('json_encode') ? json_encode($value) : serialize($value);
+        };
+        $type = mb_strtolower(gettype($value));
+        switch ($type) {
+            case 'string':
+                $string = $value;
+                break;
+
+            case 'boolean':
+                $string = $value ? 'true' : 'false';
+                break;
+
+            case 'array':
+                $string = $encode($value);
+                break;
+
+            case 'double':
+            case 'integer':
+                $string = (string)$value;
+                break;
+
+            case 'null':
+            case 'resource':
+                $string = $type;
+                break;
+
+            case 'object':
+                // We're dealing with class.
+                switch (get_class($value)) {
+                    // Don't use ::class, because someone could not have
+                    // php-xml extension installed on the server.
+                    case 'SimpleXMLElement':
+                        $string = $value->asXML();
+                        break;
+
+                    default:
+                        $string = $encode($value);
+                        break;
+                }
+                break;
+
+            default:
+                throw new InvalidArgumentException("Unsupported value type {$type}.");
+                break;
+        }
+
+        return $string;
     }
 }

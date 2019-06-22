@@ -326,6 +326,23 @@ str_between(null); // null
         </pre>
         </td>
     </tr>
+    <tr>
+        <td>to_string</td>
+        <td>Converts passed value to its closest string representation.</td>
+        <td>
+        <pre lang="php">
+        </pre>
+to_string($str = 'foobar'); // 'foobar'
+to_string($int = 123);      // '123'
+to_string($float = 123.45); // '123.45'
+to_string($null = null);    // 'null'
+to_string($array = [1, 2]); // '[1,2]' (JSON)
+to_string($bool = true);    // 'true'
+to_string($object);         // json_encode($object)
+// Assuming that $xml is a SimpleXmlElement
+to_string($xml);            // $xml->asXML()
+        </td>
+    </tr>
     <!--<tr>
         <td></td>
         <td></td>
@@ -492,7 +509,7 @@ For the creators of the Laravel framework and all libraries that were used to cr
 - [x] register_singletons
 - [x] sometimes
 - [x] str_between
-- [ ] to_string
+- [x] to_string
 - [ ] str_crop
 - [ ] str_remove
 - [ ] table
