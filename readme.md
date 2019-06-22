@@ -80,10 +80,10 @@ $carbon = carbonize('foobar'); // null
         <td>Clamps value in given range.</td>
         <td>
         <pre lang="php">
-$clamped = clamp(10); // 10.0
-$clamped = clamp(10, 5); // 5.0
-$clamped = clamp(10, 5, 15); // 5.0
-$clamped = clamp(20, 5, 15); // 15.0
+$clamped = clamp(10);           // 10.0
+$clamped = clamp(10, 5);        // 5.0
+$clamped = clamp(10, 5, 15);    // 5.0
+$clamped = clamp(20, 5, 15);    // 15.0
         </pre>
         </td>
     </tr>
@@ -92,12 +92,12 @@ $clamped = clamp(20, 5, 15); // 15.0
         <td>Returns type of the variable (value types) or a class name (reference types).</td>
         <td>
         <pre lang="php">
-classify('1'); // 'integer'
-classify('1.23'); // 'double' (or 'float', or 'real' - depends on platform)
-classify([]); // 'array'
-classify(new \App\User); // 'App/User' (instance passed)
+classify('1');              // 'integer'
+classify('1.23');           // 'double' (or 'float', or 'real' - depends on platform)
+classify([]);               // 'array'
+classify(new \App\User);    // 'App/User' (instance passed)
 classify(\App\User::class); // 'App/User' (string with FQCN passed)
-classify('test'); // 'string'
+classify('test');           // 'string'
         </pre>
         </td>
     </tr>
@@ -126,6 +126,17 @@ cli_in()->getArguments();
         <td>
         <pre lang="php">
 cli_out()->writeln('bar');
+        </pre>
+        </td>
+    </tr>
+    <tr>
+        <td>console_log</td>
+        <td>Generates HTML with \<script\> that will console.log passed $data.</td>
+        <td>
+        <pre lang="php">
+$data = [1, 2, 3];
+$html = console_log($data); // assigns output to $html
+console_log($data, true); // prints output: '<script type="text/javascript">console.log([1,2,3]);</script>'
         </pre>
         </td>
     </tr>
@@ -310,17 +321,17 @@ sometimes('biz', 0.7, 'buzz'); // returns 'biz' with 70% chance ('buzz' otherwis
         <td>Returns part of a string between two string.</td>
         <td>
         <pre lang="php">
-str_between('Foo Bar Bizz Buzz'); // 'Foo Bar Bizz Buzz' 
-str_between('Foo Bar Bizz Buzz', 'Bar ', ' Buzz'); // 'Bizz' 
-str_between('Foo Bar Bizz Buzz', 'Foo ', ' Buzz', true); // 'Bar Bizz Buzz' 
+str_between('Foo Bar Bizz Buzz');                           // 'Foo Bar Bizz Buzz' 
+str_between('Foo Bar Bizz Buzz', 'Bar ', ' Buzz');          // 'Bizz' 
+str_between('Foo Bar Bizz Buzz', 'Foo ', ' Buzz', true);    // 'Bar Bizz Buzz' 
 // Cuts from the beginning when cannot find cut's left bound
-str_between('Foo Bar Bizz Buzz', 'ZZZ ', ' Buzz'); // 'Foo Bar Bizz '
-str_between('Foo Bar Bizz Buzz', null, ' Buzz'); // 'Foo Bar Bizz '
+str_between('Foo Bar Bizz Buzz', 'ZZZ ', ' Buzz');          // 'Foo Bar Bizz '
+str_between('Foo Bar Bizz Buzz', null, ' Buzz');            // 'Foo Bar Bizz '
 // Cuts to the end when cannot find cut's right bound
-str_between('Foo Bar Bizz Buzz', 'Foo ', 'Bizzz'); // 'Bar Bizz Buzz'
-str_between('Foo Bar Bizz Buzz', 'Foo ', null); // 'Bar Bizz Buzz'
+str_between('Foo Bar Bizz Buzz', 'Foo ', 'Bizzz');          // 'Bar Bizz Buzz'
+str_between('Foo Bar Bizz Buzz', 'Foo ', null);             // 'Bar Bizz Buzz'
 // Returns an empty string when left bound is equal to right bound
-str_between('Foo Bar Bizz Buzz', 'Bizz ', 'Bizz '); // ''
+str_between('Foo Bar Bizz Buzz', 'Bizz ', 'Bizz ');         // ''
 wstr_between(''); // ''
 str_between(null); // null
         </pre>
@@ -348,10 +359,10 @@ to_string($xml);            // $xml->asXML()
         <td>Cuts off end of the string if it is too long. Can be used for data sanitization.</td>
         <td>
         <pre lang="php">
-str_crop('FooBarBizz', 3); // 'Foo'
-str_crop('FooBarBizz', 6); // 'FooBar'
-str_crop('', 10); // ''
-str_crop(null, 123); // ''
+str_crop('FooBarBizz', 3);              // 'Foo'
+str_crop('FooBarBizz', 6);              // 'FooBar'
+str_crop('', 10);                       // ''
+str_crop(null, 123);                    // ''
 // Specify custom encoding (by default it is 'UTF-8')
 str_crop('FooBarBizz, 3, 'ISO-8859-1'); // 'FooBarBizz'
         </pre>
@@ -362,11 +373,11 @@ str_crop('FooBarBizz, 3, 'ISO-8859-1'); // 'FooBarBizz'
         <td>Removes given fragments from the original string.</td>
         <td>
         <pre lang="php">
-str_remove('Foo Bar Biz'); // 'Foo Bar Biz'
-str_remove('Foo Bar Biz', 'Foo'); // ' Bar Biz'
-str_remove('Foo Bar Biz', 'Foo', 'Bar'); // '  Biz'
-str_remove('Foo Bar Biz', 'Bar', 'Biz'); // 'Foo  '
-str_remove('Foo Bar Biz', 'Buzz'); // 'Foo Bar Biz'
+str_remove('Foo Bar Biz');                  // 'Foo Bar Biz'
+str_remove('Foo Bar Biz', 'Foo');           // ' Bar Biz'
+str_remove('Foo Bar Biz', 'Foo', 'Bar');    // '  Biz'
+str_remove('Foo Bar Biz', 'Bar', 'Biz');    // 'Foo  '
+str_remove('Foo Bar Biz', 'Buzz');          // 'Foo Bar Biz'
         </pre>
         </td>
     </tr>
@@ -532,6 +543,7 @@ For the creators of the Laravel framework and all libraries that were used to cr
 - [x] cli
 - [x] cli_in
 - [x] cli_out
+- [x] console_log
 - [x] create_fake
 - [x] equals
 - [x] fileline
@@ -552,4 +564,3 @@ For the creators of the Laravel framework and all libraries that were used to cr
 - [x] str_remove
 - [x] model_table
 - [ ] trace
-- [ ] testing

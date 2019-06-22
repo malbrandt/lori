@@ -279,6 +279,25 @@ if (! function_exists('cli_out')) {
         return ($cli = cli()) !== null ? $cli->getOutput() : null;
     }
 }
+if (! function_exists('console_log')) {
+    /**
+     * Generates HTML string that will dump variable using console.log (Javascript).
+     *
+     * @param mixed $data  The data to be dumped.
+     * @param bool  $print Whether to print HTML immediately (default: false).
+     *
+     * @return string HTML string with script that will console.log encoded data.
+     * @since 0.24.9
+     */
+    function console_log($data, bool $print = false): string
+    {
+        $html = '<script type="text/javascript">console.log(' . json_encode($data) . ')</script>';
+        if ($print) {
+            print($html);
+        }
+        return $html;
+    }
+}
 if (! function_exists('create_fake')) {
     /**
      * A simple alias for Laravel's factory make method.
