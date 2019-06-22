@@ -752,3 +752,30 @@ if (! function_exists('to_string')) {
         return $string;
     }
 }
+if (! function_exists('str_crop')) {
+    /**
+     * Cuts off the end of the string if it length exceeds the limit.
+     *
+     * @param string|null $string    String to crop.
+     * @param int         $maxLength Maximum length of the string.
+     * @param string      $encoding  String encoding (default: UTF-8)
+     *
+     * @return string Cropped string
+     * @since 0.21.8
+     */
+    function str_crop(
+        $string,
+        int $maxLength,
+        string $encoding = 'UTF-8'
+    ): string {
+        if ($maxLength < 0) {
+            throw new InvalidArgumentException(
+                'Invalid length specified. Tip: maximum length of cropped string must be positive number.'
+            );
+        }
+
+        // If string is null or empty, return an empty string
+        return empty($string) ? '' : mb_substr($string, 0, $maxLength,
+            $encoding);
+    }
+}

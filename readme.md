@@ -321,17 +321,16 @@ str_between('Foo Bar Bizz Buzz', 'Foo ', 'Bizzz'); // 'Bar Bizz Buzz'
 str_between('Foo Bar Bizz Buzz', 'Foo ', null); // 'Bar Bizz Buzz'
 // Returns an empty string when left bound is equal to right bound
 str_between('Foo Bar Bizz Buzz', 'Bizz ', 'Bizz '); // ''
-str_between(''); // ''
+wstr_between(''); // ''
 str_between(null); // null
         </pre>
         </td>
     </tr>
     <tr>
         <td>to_string</td>
-        <td>Converts passed value to its closest string representation.</td>
+        <td>Converts passed value to its closest string representation. Useful for tracing.</td>
         <td>
         <pre lang="php">
-        </pre>
 to_string($str = 'foobar'); // 'foobar'
 to_string($int = 123);      // '123'
 to_string($float = 123.45); // '123.45'
@@ -341,6 +340,21 @@ to_string($bool = true);    // 'true'
 to_string($object);         // json_encode($object)
 // Assuming that $xml is a SimpleXmlElement
 to_string($xml);            // $xml->asXML()
+        </pre>
+        </td>
+    </tr>
+    <tr>
+        <td>str_crop</td>
+        <td>Cuts off end of the string if it is too long. Can be used for data sanitization.</td>
+        <td>
+        <pre lang="php">
+str_crop('FooBarBizz', 3); // 'Foo'
+str_crop('FooBarBizz', 6); // 'FooBar'
+str_crop('', 10); // ''
+str_crop(null, 123); // ''
+// Specify custom encoding (by default it is 'UTF-8')
+str_crop('FooBarBizz, 3, 'ISO-8859-1'); // 'FooBarBizz'
+        </pre>
         </td>
     </tr>
     <!--<tr>
@@ -510,7 +524,7 @@ For the creators of the Laravel framework and all libraries that were used to cr
 - [x] sometimes
 - [x] str_between
 - [x] to_string
-- [ ] str_crop
+- [x] str_crop
 - [ ] str_remove
 - [ ] table
 - [ ] trace

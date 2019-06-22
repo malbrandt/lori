@@ -9,5 +9,5 @@ class Lori
      *
      * @var string
      */
-    const VERSION = '0.20.8';
+    const VERSION = '0.21.8';
 }
