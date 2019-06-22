@@ -779,3 +779,22 @@ if (! function_exists('str_crop')) {
             $encoding);
     }
 }
+if (! function_exists('str_remove')) {
+    /**
+     * Removes needles from haystack.
+     *
+     * @param string   $haystack   The string to be "sanitized".
+     * @param string[] ...$needles Needled to remove from the given string.
+     *
+     * @return string Given string without needled.
+     * @since 0.22.8
+     */
+    function str_remove(string $haystack, ...$needles): string
+    {
+        foreach ($needles as $needle) {
+            $haystack = str_replace($needle, '', $haystack);
+        }
+
+        return $haystack;
+    }
+}

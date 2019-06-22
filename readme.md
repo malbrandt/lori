@@ -357,6 +357,19 @@ str_crop('FooBarBizz, 3, 'ISO-8859-1'); // 'FooBarBizz'
         </pre>
         </td>
     </tr>
+    <tr>
+        <td>str_remove</td>
+        <td>Removes given fragments from the original string.</td>
+        <td>
+        <pre lang="php">
+str_remove('Foo Bar Biz'); // 'Foo Bar Biz'
+str_remove('Foo Bar Biz', 'Foo'); // ' Bar Biz'
+str_remove('Foo Bar Biz', 'Foo', 'Bar'); // '  Biz'
+str_remove('Foo Bar Biz', 'Bar', 'Biz'); // 'Foo  '
+str_remove('Foo Bar Biz', 'Buzz'); // 'Foo Bar Biz'
+        </pre>
+        </td>
+    </tr>
     <!--<tr>
         <td></td>
         <td></td>
@@ -525,7 +538,7 @@ For the creators of the Laravel framework and all libraries that were used to cr
 - [x] str_between
 - [x] to_string
 - [x] str_crop
-- [ ] str_remove
+- [x] str_remove
 - [ ] table
 - [ ] trace
 - [ ] testing
