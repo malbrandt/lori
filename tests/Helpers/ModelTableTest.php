@@ -2,10 +2,9 @@
 
 namespace Malbrandt\Lori\Tests\Helpers;
 
-
-use Illuminate\Database\Eloquent\Model;
 use InvalidArgumentException;
 use Malbrandt\Lori\Tests\TestCase;
+use Illuminate\Database\Eloquent\Model;
 
 class ModelTableTest extends TestCase
 {

@@ -2,7 +2,6 @@
 
 namespace Malbrandt\Lori\Tests\Helpers;
 
-
 use InvalidArgumentException;
 use Malbrandt\Lori\Tests\TestCase;
 

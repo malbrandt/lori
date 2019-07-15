@@ -2,7 +2,6 @@
 
 namespace Malbrandt\Lori\Tests\Helpers;
 
-
 use DateTime;
 use DateTimeImmutable;
 use Illuminate\Support\Carbon;

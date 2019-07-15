@@ -2,7 +2,6 @@
 
 namespace Malbrandt\Lori\Tests\Helpers;
 
-
 use Malbrandt\Lori\Tests\TestCase;
 
 class HasTraitTest extends TestCase
@@ -12,14 +11,12 @@ class HasTraitTest extends TestCase
     /** @test */
     public function examines_properly_when_object_instance_passed()
     {
-        $withTestTrait = new class()
-        {
+        $withTestTrait = new class() {
             use HasTraitTestTrait;
         };
         $this->assertTrue(has_trait(HasTraitTestTrait::class, $withTestTrait));
 
-        $withoutTestTrait = new class()
-        {
+        $withoutTestTrait = new class() {
             use HasTraitOtherTrait;
         };
         $this->assertFalse(has_trait(HasTraitTestTrait::class,
@@ -34,7 +31,6 @@ class HasTraitTest extends TestCase
         $this->assertTrue(has_trait(HasTraitTestTrait::class, self::class));
         $this->assertFalse(has_trait(HasTraitOtherTrait::class, self::class));
     }
-
 }
 
 trait HasTraitTestTrait
