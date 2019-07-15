@@ -2,7 +2,6 @@
 
 namespace Malbrandt\Lori\Tests\Helpers;
 
-
 use Malbrandt\Lori\Tests\TestCase;
 
 class MethodTest extends TestCase
