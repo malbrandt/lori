@@ -489,17 +489,6 @@ The Laravel framework is open-source software licensed under the [MIT license](h
 ## Acknowledgements
 For the creators of the Laravel framework and all libraries that were used to create this library and the libraries that these libraries use...
 
-[ico-version]: https://img.shields.io/packagist/v/malbrandt/lori.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/malbrandt/lori.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/malbrandt/lori/master.svg?style=flat-square
-[ico-styleci]: https://styleci.io/repos/12345678/shield
-
-[link-packagist]: https://packagist.org/packages/malbrandt/lori
-[link-downloads]: https://packagist.org/packages/malbrandt/lori
-[link-travis]: https://travis-ci.org/malbrandt/lori
-[link-styleci]: https://styleci.io/repos/12345678
-[link-author]: https://github.com/malbrandt
-
 ## ToDo's
 
 ### Concepts
@@ -570,3 +559,15 @@ For the creators of the Laravel framework and all libraries that were used to cr
 - [x] str_remove
 - [x] model_table
 - [ ] trace
+
+
+[ico-version]: https://img.shields.io/packagist/v/malbrandt/lori.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/malbrandt/lori.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/malbrandt/lori/master.svg?style=flat-square
+[ico-styleci]: https://styleci.io/repos/12345678/shield
+
+[link-packagist]: https://packagist.org/packages/malbrandt/lori
+[link-downloads]: https://packagist.org/packages/malbrandt/lori
+[link-travis]: https://travis-ci.org/malbrandt/lori
+[link-styleci]: https://styleci.io/repos/173164835
+[link-author]: https://github.com/malbrandt
