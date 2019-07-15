@@ -564,7 +564,7 @@ For the creators of the Laravel framework and all libraries that were used to cr
 [ico-version]: https://img.shields.io/packagist/v/malbrandt/lori.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/malbrandt/lori.svg?style=flat-square
 [ico-travis]: https://img.shields.io/travis/malbrandt/lori/master.svg?style=flat-square
-[ico-styleci]: https://styleci.io/repos/12345678/shield
+[ico-styleci]: https://styleci.io/repos/173164835/shield
 
 [link-packagist]: https://packagist.org/packages/malbrandt/lori
 [link-downloads]: https://packagist.org/packages/malbrandt/lori
