@@ -2,17 +2,15 @@
 
 namespace Malbrandt\Lori\Tests\Helpers;
 
-
-use Malbrandt\Lori\Tests\TestCase;
 use ReflectionClass;
+use Malbrandt\Lori\Tests\TestCase;
 
 class AccessPropTest extends TestCase
 {
     /** @test */
     public function reads_accessible_and_not_accessible_properties()
     {
-        $obj = new class
-        {
+        $obj = new class {
             private $foo = 'foo';
             protected $bar = 'bar';
             public $biz = 'biz';
@@ -25,8 +23,7 @@ class AccessPropTest extends TestCase
     /** @test */
     public function modifies_accessible_and_not_accessible_properties()
     {
-        $obj = new class
-        {
+        $obj = new class {
             private $foo = 'foo';
             protected $bar = 'bar';
             public $biz = 'biz';
@@ -42,8 +39,7 @@ class AccessPropTest extends TestCase
     /** @test */
     public function can_set_null_value()
     {
-        $obj = new class
-        {
+        $obj = new class {
             private $foo = 'foo';
             protected $bar = 'bar';
             public $biz = 'biz';
@@ -58,10 +54,8 @@ class AccessPropTest extends TestCase
 
     /** @test */
     public function retores_previous_access_modifier_after_reading_property_value(
-    )
-    {
-        $obj = new class
-        {
+    ) {
+        $obj = new class {
             private $foo = 'bar';
         };
 
@@ -77,10 +71,8 @@ class AccessPropTest extends TestCase
 
     /** @test */
     public function retores_previous_access_modifier_after_modifying_property_value(
-    )
-    {
-        $obj = new class
-        {
+    ) {
+        $obj = new class {
             private $foo = 'bar';
         };
 

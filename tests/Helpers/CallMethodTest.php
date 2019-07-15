@@ -2,18 +2,16 @@
 
 namespace Malbrandt\Lori\Tests\Helpers;
 
-
-use Malbrandt\Lori\Tests\TestCase;
 use ReflectionClass;
 use ReflectionMethod;
+use Malbrandt\Lori\Tests\TestCase;
 
 class CallMethodTest extends TestCase
 {
     /** @test */
     public function can_call_private_instance_methods()
     {
-        $obj = new class
-        {
+        $obj = new class {
             private function privateMethod()
             {
                 return 'private';
@@ -25,8 +23,7 @@ class CallMethodTest extends TestCase
     /** @test */
     public function can_call_protected_instance_methods()
     {
-        $obj = new class
-        {
+        $obj = new class {
             protected function protectedMethod()
             {
                 return 'protected';
@@ -38,8 +35,7 @@ class CallMethodTest extends TestCase
     /** @test */
     public function can_call_public_instance_methods()
     {
-        $obj = new class
-        {
+        $obj = new class {
             public function publicMethod()
             {
                 return 'public';
@@ -51,8 +47,7 @@ class CallMethodTest extends TestCase
     /** @test */
     public function can_pass_array_as_an_argument()
     {
-        $obj = new class
-        {
+        $obj = new class {
             private function returnArg($arg)
             {
                 return $arg;
@@ -66,8 +61,7 @@ class CallMethodTest extends TestCase
     /** @test */
     public function can_pass_callable_that_resolves_args()
     {
-        $obj = new class
-        {
+        $obj = new class {
             private function returnArg($arg)
             {
                 return $arg;
@@ -84,8 +78,7 @@ class CallMethodTest extends TestCase
     /** @test */
     public function can_pass_single_scalar_as_an_argument()
     {
-        $obj = new class
-        {
+        $obj = new class {
             private function returnArg($arg)
             {
                 return $arg;
@@ -97,8 +90,7 @@ class CallMethodTest extends TestCase
     /** @test */
     public function can_pass_several_scalars_as_an_arguments()
     {
-        $obj = new class
-        {
+        $obj = new class {
             private function sum($a, $b)
             {
                 return $a + $b;
@@ -111,8 +103,7 @@ class CallMethodTest extends TestCase
     /** @test */
     public function restores_private_modifier_after_call()
     {
-        $obj = new class
-        {
+        $obj = new class {
             private function sum($a, $b)
             {
                 return $a + $b;
@@ -132,8 +123,7 @@ class CallMethodTest extends TestCase
     /** @test */
     public function can_call_private_static_method()
     {
-        $class = new class
-        {
+        $class = new class {
             public static function staticMethod()
             {
                 return 'static';

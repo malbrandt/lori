@@ -2,7 +2,6 @@
 
 namespace Malbrandt\Lori\Tests\Helpers;
 
-
 use ArrayAccess;
 use Malbrandt\Lori\Tests\TestCase;
 

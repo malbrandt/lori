@@ -2,7 +2,6 @@
 
 namespace Malbrandt\Lori\Utils;
 
-
 use Illuminate\Console\Events\CommandStarting;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -11,7 +10,6 @@ use Symfony\Component\Console\Output\OutputInterface;
  * Wrapper class for console input & output.
  * Could be used to improve tracing.
  *
- * @package Malbrandt\Lori\Utils
  * @author  Marek Malbrandt <marek.malbrandt@gmail.com>
  * @since   0.9.5
  * @see     \cli(), \cli_in(), \cli_out() global helper functions (aliases)
@@ -39,8 +37,7 @@ class Console
      * @return \Symfony\Component\Console\Output\OutputInterface
      */
     public function getOutput(
-    ): OutputInterface
-    {
+    ): OutputInterface {
         return $this->output;
     }
 

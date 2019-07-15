@@ -2,7 +2,6 @@
 
 namespace Malbrandt\Lori\Tests\Helpers;
 
-
 use Malbrandt\Lori\Tests\TestCase;
 
 class StrBetweenTest extends TestCase
@@ -56,8 +55,7 @@ class StrBetweenTest extends TestCase
 
     /** @test */
     public function returns_an_empty_string_if_left_bound_is_equal_to_right_bound(
-    )
-    {
+    ) {
         $this->assertEquals(
             '',
             str_between(self::SENTENCE, 'brown', 'brown')

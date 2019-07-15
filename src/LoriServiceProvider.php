@@ -2,10 +2,10 @@
 
 namespace Malbrandt\Lori;
 
-use Illuminate\Console\Events\CommandStarting;
+use Malbrandt\Lori\Utils\Console;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
-use Malbrandt\Lori\Utils\Console;
+use Illuminate\Console\Events\CommandStarting;
 
 class LoriServiceProvider extends ServiceProvider
 {
@@ -33,7 +33,6 @@ class LoriServiceProvider extends ServiceProvider
                 });
             });
     }
-
 
     /**
      * Console-specific booting.
@@ -66,7 +65,6 @@ class LoriServiceProvider extends ServiceProvider
         // $this->commands([]);
     }
 
-
     /**
      * Register any package services.
      *
@@ -76,7 +74,6 @@ class LoriServiceProvider extends ServiceProvider
     {
         //$this->mergeConfigFrom(__DIR__ . '/../config/lori.php', 'lori');
     }
-
 
     /**
      * Get the services provided by the provider.

@@ -2,10 +2,9 @@
 
 namespace Malbrandt\Lori\Tests\Helpers;
 
-
-use Malbrandt\Lori\Tests\TestCase;
-use SimpleXMLElement;
 use stdClass;
+use SimpleXMLElement;
+use Malbrandt\Lori\Tests\TestCase;
 
 class ToStringTest extends TestCase
 {

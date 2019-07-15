@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use Illuminate\Database\Eloquent\Model;
 
 if (! function_exists('access_prop')) {
     /**
@@ -66,7 +66,7 @@ if (! function_exists('call_method')) {
         if (! is_object($object) || ! class_exists(classify($object))) {
             $class = classify($object);
             throw new InvalidArgumentException(
-                'Invalid value. Tip: pass object instance or a class name as' .
+                'Invalid value. Tip: pass object instance or a class name as'.
                 " \$object argument. Passed value's type: {$class}."
             );
         }
@@ -117,7 +117,7 @@ if (! function_exists('caller')) {
                 $backwards + 1)[$backwards] ?? null;
 
         if ($caller === null) {
-            return null;
+            return;
         }
 
         if ($parts === null) {
@@ -131,10 +131,11 @@ if (! function_exists('caller')) {
                     $callerParts[$part] = $caller[$part];
                 }
             }
+
             return $callerParts;
         } else {
             throw new InvalidArgumentException(
-                'Invalid type of part passed. Tip: pass null if you need whole' .
+                'Invalid type of part passed. Tip: pass null if you need whole'.
                 ' object, string if you need only one part or an array, if you need more.'
             );
         }
@@ -164,7 +165,7 @@ if (! function_exists('carbonize')) {
                 try {
                     return Illuminate\Support\Carbon::parse($date);
                 } catch (Throwable $e) {
-                    return null;
+                    return;
                 }
 
             case $date instanceof \Carbon\Carbon:
@@ -186,7 +187,7 @@ if (! function_exists('carbonize')) {
                 return Illuminate\Support\Carbon::instance($date);
 
             default:
-                return null;
+                return;
         }
     }
 }
@@ -208,9 +209,9 @@ if (! function_exists('clamp')) {
         }
 
         if (null !== $min && $value < $min) {
-            return (float)$min;
+            return (float) $min;
         } elseif (null !== $max && $value > $max) {
-            return (float)$max;
+            return (float) $max;
         } else {
             return $value;
         }
@@ -291,10 +292,11 @@ if (! function_exists('console_log')) {
      */
     function console_log($data, bool $print = false): string
     {
-        $html = '<script type="text/javascript">console.log(' . json_encode($data) . ')</script>';
+        $html = '<script type="text/javascript">console.log('.json_encode($data).')</script>';
         if ($print) {
-            print($html);
+            echo $html;
         }
+
         return $html;
     }
 }
@@ -344,8 +346,7 @@ if (! function_exists('equals')) {
         float $first,
         float $second,
         float $epsilon = 2.2204460492503e-16 /* PHP_FLOAT_EPSILON */
-    ): bool
-    {
+    ): bool {
         return abs($first - $second) < $epsilon;
     }
 }
@@ -374,7 +375,8 @@ if (! function_exists('fileline')) {
             throw new LogicException('Cannot examine caller\'s file/line or both.');
         }
         $path = $fullPath ? $file : basename($file);
-        return $path . $separator . $line;
+
+        return $path.$separator.$line;
     }
 }
 if (! function_exists('flash_error')) {
@@ -499,21 +501,21 @@ if (! function_exists('method')) {
         $result = null;
 
         if (($caller = caller($backwards)) === null) {
-            return null;
+            return;
         }
         $isClosure = strpos($caller['function'], '{closure}') > -1;
         if ($isClosure) {
             // TODO: is it possible to return callable Closure (caller) using some reflection/debug backtrace techniques?
-            return null;
+            return;
         }
 
         switch ($format) {
             case METHOD_FORMAT_ACTION:
-                $result = class_basename($caller['class']) . '@' . $caller['function'];
+                $result = class_basename($caller['class']).'@'.$caller['function'];
                 break;
 
             case METHOD_FORMAT_ACTION_FQCN:
-                $result = $caller['class'] . '@' . $caller['function'];
+                $result = $caller['class'].'@'.$caller['function'];
                 break;
 
             case METHOD_FORMAT_CALLABLE:
@@ -522,7 +524,7 @@ if (! function_exists('method')) {
                 } elseif (isset($caller['object'])) {
                     $result = [$caller['object'], $caller['function']];
                 } else {
-                    $result = $caller['class'] . '::' . $caller['function'];
+                    $result = $caller['class'].'::'.$caller['function'];
                 }
 
                 break;
@@ -555,7 +557,7 @@ if (! function_exists('on')) {
         foreach ($events as $event) {
             if (! is_string($event)) {
                 throw new InvalidArgumentException(
-                    'Invalid event name. Tip: all event names must be' .
+                    'Invalid event name. Tip: all event names must be'.
                     ' strings with event alias or event class name.'
                 );
             }
@@ -614,7 +616,7 @@ if (! function_exists('register_singletons')) {
                 });
             } else {
                 throw new InvalidArgumentException(
-                    'Invalid concrete specified. Tip: concrete must be class name (FQCN),' .
+                    'Invalid concrete specified. Tip: concrete must be class name (FQCN),'.
                     ' object instance that would be a singleton or a Closure that resolves concrete impl.'
                 );
             }
@@ -741,7 +743,7 @@ if (! function_exists('to_string')) {
 
             case 'double':
             case 'integer':
-                $string = (string)$value;
+                $string = (string) $value;
                 break;
 
             case 'null':
