@@ -1,5 +1,9 @@
 # Lori
 
+<p align="center">
+ <img src="resources/ml-01-logo-thumb.png" alt="Malbrandt/Lori Logo">
+</p>
+
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Total Downloads][ico-downloads]][link-downloads]
 [![Build Status][ico-travis]][link-travis]
@@ -476,7 +480,7 @@ This library uses [Semantic Versioning 2.0.0](https://semver.org/). We can assum
 * Marek Malbrandt - author.
 
 ## License
-Copyright (c) Marek Malbrandt <marek@malbrandt.pl>
+Copyright (c) Marek Malbrandt <marek.malbrandt@gmail.com>
 
 The Laravel framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
@@ -538,6 +542,8 @@ For the creators of the Laravel framework and all libraries that were used to cr
 - [x] call_method
 - [x] caller
 - [x] carbonize
+- [ ] Collection::duplicates
+- [ ] Collection::duplicatedBy
 - [x] clamp
 - [x] classify
 - [x] cli
