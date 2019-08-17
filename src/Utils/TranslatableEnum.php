@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Malbrandt\Lori\Utils;
-
 
 trait TranslatableEnum
 {
@@ -28,6 +26,6 @@ trait TranslatableEnum
 
     public static function transEnumValue($value): string
     {
-        return trans('enums.' . class_basename(static::class) . '.' . $value);
+        return trans('enums.'.class_basename(static::class).'.'.$value);
     }
 }

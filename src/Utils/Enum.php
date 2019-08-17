@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Malbrandt\Lori\Utils;
-
 
 use Illuminate\Support\Arr;
 
@@ -13,7 +11,6 @@ use Illuminate\Support\Arr;
  * Can render Laravel's validation rule.
  * Can pick random key or value.
  *
- * @package Malbrandt\Lori\Utils
  * @since 0.25.0
  */
 trait Enum
@@ -24,7 +21,7 @@ trait Enum
         $values = Arr::wrap($value);
 
         foreach ($values as $value) {
-            if (!in_array($value, static::getConstantValues(), $strict)) {
+            if (! in_array($value, static::getConstantValues(), $strict)) {
                 $valid = false;
                 break;
             }
@@ -53,7 +50,7 @@ trait Enum
         $values = Arr::wrap($value);
 
         foreach ($values as $value) {
-            if (!in_array($value, static::getConstantKeys(), $strict)) {
+            if (! in_array($value, static::getConstantKeys(), $strict)) {
                 $valid = false;
                 break;
             }
@@ -71,7 +68,7 @@ trait Enum
 
     public static function validationRule(): string
     {
-        return 'in:' . implode(',', static::getConstantValues());
+        return 'in:'.implode(',', static::getConstantValues());
     }
 
     public static function getRandomKey(int $number = 1)
@@ -85,7 +82,7 @@ trait Enum
 
         $numDraw = clamp($number, 0, count($values));
         $indexes = array_rand($values, $numDraw);
-        for ($i = 0; $i < $numDraw; ++$i) {
+        for ($i = 0; $i < $numDraw; $i++) {
             $drawn = $indexes[$i];
             if (in_array($drawn, $random, true)) {
                 $random[] = $drawn;
