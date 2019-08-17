@@ -493,36 +493,38 @@ For the creators of the Laravel framework and all libraries that were used to cr
 
 ### Concepts
 
-- [ ] DTO
-- [ ] CLI
-- [ ] Automemoization
-- [ ] Memoizaiton
-- [ ] CreateOrIncrement
-- [ ] CreatesReferences
-- [ ] HasValidationRules
-- [ ] SelectOptions
-- [ ] Identifiable
-- [ ] Measure
-- [ ] RelativeDate
-- [ ] RequestFilters
-- [ ] SelectiveFind
-- [ ] Service
-- [ ] Url
-- [ ] Str
-- [ ] ValidationHelpers
+- [ ] ArrayToExcel
 - [ ] Autofactory
 - [ ] Autoforms
-- [ ] ArrayToExcel
-- [ ] DynamicParameters
-- [ ] NotImplementedException
+- [ ] Automemoization
 - [ ] AutoValidation
-- [ ] DisplayProgress
 - [ ] BatchInsert
-- [ ] GatherQueries
-- [ ] MeasureResponseTimes
-- [ ] RouteLocks
-- [ ] RegisterRoutes
+- [ ] CLI
+- [ ] CreateOrIncrement
+- [ ] CreatesReferences
 - [ ] Deferred (execution)
+- [ ] DisplayProgress
+- [ ] DTO
+- [ ] DynamicParameters
+- [x] Enum
+- [ ] GatherQueries
+- [ ] HasValidationRules
+- [ ] Identifiable
+- [ ] Measure
+- [ ] MeasureResponseTimes
+- [ ] Memoizaiton
+- [ ] NotImplementedException
+- [ ] RegisterRoutes
+- [ ] RelativeDate
+- [ ] RequestFilters
+- [ ] RouteLocks
+- [ ] SelectiveFind
+- [ ] SelectOptions
+- [ ] Service
+- [ ] Str
+- [x] TranslatableEnum
+- [ ] Url
+- [ ] ValidationHelpers
 
 ### Helper functions
 

@@ -292,7 +292,7 @@ if (! function_exists('console_log')) {
      */
     function console_log($data, bool $print = false): string
     {
-        $html = '<script type="text/javascript">console.log('.json_encode($data).')</script>';
+        $html = '<script type="text/javascript">console.log('.json_encode($data).');</script>';
         if ($print) {
             echo $html;
         }
