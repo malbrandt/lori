@@ -3,7 +3,6 @@
 namespace Malbrandt\Lori\Tests\Utils;
 
 use Malbrandt\Lori\Tests\TestCase;
-use Malbrandt\Lori\Utils\TranslatableEnum;
 
 class TranslatableEnumTest extends TestCase
 {

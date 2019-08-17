@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Malbrandt\Lori\Tests\Utils;
-
 
 use Malbrandt\Lori\Utils\Enum;
 
